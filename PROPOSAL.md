@@ -15,7 +15,7 @@ coding the game, for now I know that I'm gonna use ofTimer to have some sort of 
 sprites for the characters, and I could give some of the more complicated graphics methods from the graphics portion of OF a try
 like ofShader and ofPixels, since I plan on using pixel art for my graphics.
 
-I've also found the library [Allgero](http://liballeg.org/) to use which is a library that focuses on video games. I plan on using this
+I've also found the library [Allegro](http://liballeg.org/) to use which is a library that focuses on video games. I plan on using this
 library's full screen mode to make for a better user experience and to handle mouse input more accurately since OF clicks depend on
 where the position clicked is in reference to other  objects. I would also use [Rapid Json](http://rapidjson.org/) to read
 my JSon file since it seems to have good performance and would allow me to reuse my old JSon instead of integrating the story
