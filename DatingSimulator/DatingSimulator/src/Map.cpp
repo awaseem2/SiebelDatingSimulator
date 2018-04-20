@@ -10,7 +10,8 @@ void Map::LoadMap(std::string file_name)
 		for (int col = 0; col < 13; col++)
 		{
 			file >> curr_coordinates;
-			Tile tile((curr_coordinates[0] - '0') * 32, (curr_coordinates[2] - '0') * 32, (col) * 32, (row) * 32, 32, 32);
+			Tile tile((curr_coordinates[0] - '0') * 32, (curr_coordinates[2] - '0') * 32, (col) * 32, (row) * 32, 
+				32, 32, curr_coordinates[3]);
 			tiles.push_back(tile);
 		}
 	}

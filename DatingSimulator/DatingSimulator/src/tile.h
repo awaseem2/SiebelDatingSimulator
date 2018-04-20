@@ -13,9 +13,12 @@ private:
 	int height_;
 	int uv_x_;
 	int uv_y_;
+	bool can_walk_through;
 
 public:
-	Tile(int uv_x, int uv_y, int x, int y, int width, int height);
+	Tile(int uv_x, int uv_y, int x, int y, int width, int height, char collision_type);
 	void Draw();
+	bool CanWalkThrough();
+	void SetCanWalkThrough(bool boolean);
 };
 

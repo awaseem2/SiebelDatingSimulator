@@ -4,7 +4,7 @@
 void Player::LoadCharacter()
 {
 	character.load("../data/MainCharacter.png");
-	character.draw(starting_pos_x, starting_pos_y);
+	character.draw(pos_x, pos_y);
 }
 
 void Player::DrawCharacter()
@@ -33,6 +33,11 @@ void Player::UpdatePosition(int key)
 			break;
 	}
 	
+}
+
+void Player::SetCurrentTile(Tile tile)
+{
+	current_tile = tile;
 }
 
 
