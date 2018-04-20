@@ -11,24 +11,37 @@ void Player::DrawCharacter()
 	character.draw(pos_x, pos_y);
 }
 
-void Player::UpdatePosition(int key)
+void Player::UpdatePosition(int key, Map map)
 {
+	Tile curr_tile = map.GetTiles()[((pos_x - 8) % 32) * (pos_y % 32)];
 	switch (key)
 	{
 	case OF_KEY_DOWN:
-		pos_y += kTileSize;
+		//if (curr_tile.CanWalkThrough())
+		//{
+			pos_y += kTileSize;
+		//}
 		break;
 
 	case OF_KEY_UP:
-		pos_y -= kTileSize;
+		//if (curr_tile.CanWalkThrough())
+		//{
+			pos_y -= kTileSize;
+		//}
 		break;
 
 	case OF_KEY_RIGHT:
-		pos_x += kTileSize;
+		//if (curr_tile.CanWalkThrough())
+		//{
+			pos_x += kTileSize;
+		//}
 		break;
 
 	case OF_KEY_LEFT:
-		pos_x -= kTileSize;
+		//if (curr_tile.CanWalkThrough())
+		//{
+			pos_x -= kTileSize;
+		//}
 		break;
 	}
 

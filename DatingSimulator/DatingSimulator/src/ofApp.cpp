@@ -23,7 +23,7 @@ void ofApp::draw() {
 void ofApp::keyPressed(int key) {
 	if (key == OF_KEY_DOWN || key == OF_KEY_UP || key == OF_KEY_RIGHT || OF_KEY_LEFT)
 	{
-		player.UpdatePosition(key);
+		player.UpdatePosition(key, map);
 	}
 
 }
