@@ -15,6 +15,29 @@ void Map::LoadMap(std::string file_name)
 			tiles.push_back(tile);
 		}
 	}
+	
+	
+	//while (file >> curr_coordinates)
+	//{
+	//	if (cols % 14 == 0)
+	//	{
+	//		rows++;
+	//		cols = 1;
+	//	}
+	//	
+	//	/*if (cols == 0) 
+	//	{
+	//		col_size = 1;
+	//	}
+	//	else
+	//	{
+	//		col_size = cols;
+	//	}*/
+	//	Tile tile((curr_coordinates[0] - '0') * 32, (curr_coordinates[2] - '0') * 32, cols * 32, rows * 32, 32, 32);
+	//	tiles.push_back(tile);
+
+	//	cols++;
+	//}
 }
 
 void Map::DrawMap()
