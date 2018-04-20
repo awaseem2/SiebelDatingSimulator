@@ -1,6 +1,6 @@
 #pragma once
-#include "ofMain.h"
 #include <string>
+#include "ofMain.h"
 
 class Tile
 {
