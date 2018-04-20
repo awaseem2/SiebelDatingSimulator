@@ -11,6 +11,7 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\Map.cpp" />
+    <ClCompile Include="src\player.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -28,6 +29,7 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\map.h" />
+    <ClInclude Include="src\player.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />

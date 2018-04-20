@@ -9,6 +9,8 @@ class Map
 {
 private:
 	vector<Tile> tiles;
+	int map_width;
+	int map_height;
 
 public:
 	void LoadMap(std::string file_name);

@@ -4,6 +4,7 @@
 #include "ofMain.h"
 #include "tile.h"
 #include "map.h"
+#include "player.h"
 
 using std::vector;
 
@@ -11,6 +12,7 @@ class ofApp : public ofBaseApp {
 
 private:
 	Map map;
+	Player player;
 	
 public:
 	void setup();

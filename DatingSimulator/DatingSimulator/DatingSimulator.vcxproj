@@ -176,12 +176,14 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\player.cpp" />
     <ClCompile Include="src\Map.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
     <ClCompile Include="src\tile.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\player.h" />
     <ClInclude Include="src\map.h" />
     <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="src\tile.h" />
