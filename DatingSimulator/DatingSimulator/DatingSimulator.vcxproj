@@ -176,19 +176,19 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Npc.cpp" />
     <ClCompile Include="src\Map.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
     <ClCompile Include="src\player.cpp" />
     <ClCompile Include="src\tile.cpp" />
-    <ClCompile Include="utilities.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\npc.h" />
     <ClInclude Include="src\map.h" />
     <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="src\player.h" />
     <ClInclude Include="src\tile.h" />
-    <ClInclude Include="utilities.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="$(OF_ROOT)\libs\openFrameworksCompiled\project\vs\openframeworksLib.vcxproj">
@@ -206,9 +206,12 @@
     <Image Include="bin\data\assets\OutsideSiebelTileSheet.png" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="bin\data\OutsideSiebel.txt">
+    <Text Include="bin\data\assets\OutsideSiebel.txt">
       <DeploymentContent>true</DeploymentContent>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="bin\data\assets\MapLayout.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ProjectExtensions>

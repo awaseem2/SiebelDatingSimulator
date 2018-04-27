@@ -1,5 +1,6 @@
 #pragma once
-#include "tile.h";
+#include "tile.h"
+#include "pugixml.hpp"
 #include <string>
 #include <vector>
 
@@ -11,8 +12,7 @@ private:
 	vector<Tile> tiles;
 
 public:
-	void LoadMap(std::string file_name);
+	void LoadMap(const std::string &file_name);
 	void DrawMap();
 	vector<Tile> GetTiles();
 };
-

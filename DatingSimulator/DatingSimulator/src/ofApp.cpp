@@ -4,33 +4,34 @@
 void ofApp::setup() {
 	ofSetWindowTitle("Siebel Dating Simulator");
 	ofBackground(255, 255, 255);
-	map.LoadMap("C:\\Users\\aly53\\Downloads\\openFrameworks\\of_v0.9.8_vs_release\\126 Final Project\\DatingSimulator\\DatingSimulator\\bin\\data\\OutsideSiebel.txt");
+	map.LoadMap("C:/Users/aly53/Downloads/openFrameworks/of_v0.9.8_vs_release/126 Final Project/DatingSimulator/DatingSimulator/bin/data/assets/MapLayout.xml");
+	npc.LoadNpc("C:/Users/aly53/Downloads/openFrameworks/of_v0.9.8_vs_release/126 Final Project/DatingSimulator/DatingSimulator/bin/data/assets/MapLayout.xml");
 	player.LoadCharacter();
 }
 
 //--------------------------------------------------------------
 void ofApp::update() {
-
+	player.UpdatePosition(map);
 }
 
 //--------------------------------------------------------------
 void ofApp::draw() {
 	map.DrawMap();
 	player.DrawCharacter();
+	npc.DrawNpc();
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key) {
 	if (key == OF_KEY_DOWN || key == OF_KEY_UP || key == OF_KEY_RIGHT || OF_KEY_LEFT)
 	{
-		player.UpdatePosition(key, map);
+		player.SetCurrentDirection(key);
 	}
-
 }
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key) {
-
+	player.SetCurrentDirection(0);
 }
 
 //--------------------------------------------------------------

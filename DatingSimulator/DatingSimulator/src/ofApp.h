@@ -3,6 +3,7 @@
 #include "ofMain.h"
 #include "map.h"
 #include "player.h"
+#include "npc.h"
 
 using std::vector;
 
@@ -10,7 +11,9 @@ class ofApp : public ofBaseApp {
 
 private:
 	Map map;
+	Npc npc;
 	Player player;
+	ofImage angrave;
 	
 public:
 	void setup();

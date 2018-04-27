@@ -12,7 +12,7 @@
     </ClCompile>
     <ClCompile Include="src\Map.cpp" />
     <ClCompile Include="src\player.cpp" />
-    <ClCompile Include="utilities.cpp" />
+    <ClCompile Include="src\Npc.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -31,15 +31,18 @@
     </ClInclude>
     <ClInclude Include="src\map.h" />
     <ClInclude Include="src\player.h" />
-    <ClInclude Include="utilities.h" />
+    <ClInclude Include="src\npc.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="bin\data\OutsideSiebel.txt" />
+    <Image Include="bin\data\assets\OutsideSiebelTileSheet.png" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="bin\data\assets\OutsideSiebelTileSheet.png" />
+    <Text Include="bin\data\assets\OutsideSiebel.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="bin\data\assets\MapLayout.xml" />
   </ItemGroup>
 </Project>

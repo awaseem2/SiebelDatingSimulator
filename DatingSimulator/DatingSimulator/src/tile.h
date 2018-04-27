@@ -6,7 +6,8 @@ class Tile
 {
 
 private:
-	std::string texture = "assets/OutsideSiebelTileSheet.png";
+	string texture = "assets/OutsideSiebelTileSheet.png";
+	string tile_sheet_;
 	int x_;
 	int y_;
 	int width_;
@@ -14,11 +15,12 @@ private:
 	int uv_x_;
 	int uv_y_;
 	bool can_walk_through;
+	bool npc;
 
 public:
-	Tile(int uv_x, int uv_y, int x, int y, int width, int height, char collision_type);
+	Tile(int uv_x, int uv_y, int x, int y, int width, int height, char collision_type, string tile_sheet);
 	void Draw();
 	bool CanWalkThrough();
-	void SetCanWalkThrough(bool boolean);
+	bool ContainsNpc();
 };
 

@@ -11,10 +11,9 @@ void Player::DrawCharacter()
 	character.draw(pos_x, pos_y);
 }
 
-//doesn't account for non arrow key presses yet
-void Player::UpdatePosition(int key, Map map)
-{	
-	std::tuple<int, int> new_coordinates = GetNewCoordinates(key);
+void Player::UpdatePosition(Map map)
+{
+	std::tuple<int, int> new_coordinates = GetNewCoordinates(current_direction_);
 	int new_x = std::get<0>(new_coordinates);
 	int new_y = std::get<1>(new_coordinates);
 	int x_modified = (new_x - 8);
@@ -29,6 +28,11 @@ void Player::UpdatePosition(int key, Map map)
 		pos_y = new_y;
 	}
 
+}
+
+void Player::SetCurrentDirection(int direction)
+{
+	current_direction_ = static_cast<PlayerDirection>(direction);
 }
 
 int Player::GetX()
@@ -48,39 +52,22 @@ std::tuple<int, int> Player::GetNewCoordinates(int key)
 
 	switch (key)
 	{
-	case OF_KEY_DOWN:
-		//if (curr_tile.CanWalkThrough())
-		//{
+	case kDown:
 		new_y = pos_y + kTileSize;
-		//}
 		break;
 
-	case OF_KEY_UP:
-		//if (curr_tile.CanWalkThrough())
-		//{
+	case kUp:
 		new_y = pos_y - kTileSize;
-		//}
 		break;
 
-	case OF_KEY_RIGHT:
-		//if (curr_tile.CanWalkThrough())
-		//{
+	case kRight:
 		new_x = pos_x + kTileSize;
-		//}
 		break;
 
-	case OF_KEY_LEFT:
-		//if (curr_tile.CanWalkThrough())
-		//{
+	case kLeft:
 		new_x = pos_x - kTileSize;
-		//}
 		break;
 	}
 
 	return std::make_tuple(new_x, new_y);
 }
-
-//void Player::SetCurrentTile(Tile tile)
-//{
-//	current_tile = tile;
-//}
