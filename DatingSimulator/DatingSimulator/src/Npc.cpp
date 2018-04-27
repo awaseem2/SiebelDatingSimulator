@@ -24,8 +24,23 @@ void Npc::DrawNpc()
 }
 
 void Npc::DrawMessage()
-{
+{	
+	ofSetColor(ofColor::white);
+	ofDrawRectangle(pos_x, pos_y + 32 * 5 + 8, 32 * 11, 32 * 2 + 8);
 	
+	string message = phrases_[message_number];
+	ofSetColor(0, 0, 0);
+	ofDrawBitmapString(message, pos_x + 32, pos_y + 32 * 6 + 8);
+
+	message_number++;
+	if (message_number > phrases_.size())
+	{
+		message_number = 0;
+	}
+
+	//reset color to prevent entire screen from being filled
+	ofEnableAlphaBlending();
+	ofSetColor(255, 255, 255, 255);
 }
 
 int Npc::GetX()

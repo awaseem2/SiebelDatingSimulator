@@ -17,7 +17,11 @@ void ofApp::update() {
 
 	if (player_rect.intersects(npc_rect))
 	{
-		npc.DrawMessage();
+		draw_npc_message = true;
+	}
+	else
+	{
+		draw_npc_message = false;
 	}
 }
 
@@ -26,6 +30,11 @@ void ofApp::draw() {
 	map.DrawMap();
 	player.DrawCharacter();
 	npc.DrawNpc();
+
+	if (draw_npc_message)
+	{
+		npc.DrawMessage();
+	}
 }
 
 //--------------------------------------------------------------

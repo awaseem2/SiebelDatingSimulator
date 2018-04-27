@@ -15,6 +15,7 @@ private:
 	ofRectangle npc_rect;
 	Player player;
 	ofRectangle player_rect;
+	bool draw_npc_message = false;
 	
 public:
 	void setup();

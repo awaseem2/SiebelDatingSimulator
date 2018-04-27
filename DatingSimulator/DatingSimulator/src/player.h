@@ -8,8 +8,10 @@ class Player
 private:
 	ofImage character;
 	PlayerDirection current_direction_ = kNone;
-	int pos_x = 8 * 32 + 8; // + 8 accounting for offset to be in middle of tile
-	int pos_y = 6 * 32; 
+	//int pos_x = 8 * 32 + 8; // + 8 accounting for offset to be in middle of tile
+	//int pos_y = 6 * 32; 
+	int pos_x = 3 * 32 + 8;
+	int pos_y = 5 * 32;
 	int kTileSize = 32;
 
 public:
