@@ -5,7 +5,7 @@ and added the ability to move it from tile to tile with arrow keys.
 
 I've been struggling a lot with making certain tiles not able to be walked through. I will make sure to finish that soon.
 
-# Week of 21st
+# Week of April 21st
 
 Certain border and wall tiles are no longer able to be walked through. The file paths of images are no longer hard coded and are now
 read in from an xml file. This change allows for more rooms to be added in the future without and hassle. I decided to use pugi for reading the xml file since it seemed really simple to use and is fairly popular which makes debugging easier.
