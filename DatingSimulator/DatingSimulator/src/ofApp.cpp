@@ -7,11 +7,18 @@ void ofApp::setup() {
 	map.LoadMap("C:/Users/aly53/Downloads/openFrameworks/of_v0.9.8_vs_release/126 Final Project/DatingSimulator/DatingSimulator/bin/data/assets/MapLayout.xml");
 	npc.LoadNpc("C:/Users/aly53/Downloads/openFrameworks/of_v0.9.8_vs_release/126 Final Project/DatingSimulator/DatingSimulator/bin/data/assets/MapLayout.xml");
 	player.LoadCharacter();
+	LoadRectangles();
 }
 
 //--------------------------------------------------------------
 void ofApp::update() {
 	player.UpdatePosition(map);
+	UpdatePlayerRectangle();
+
+	if (player_rect.intersects(npc_rect))
+	{
+		npc.DrawMessage();
+	}
 }
 
 //--------------------------------------------------------------
@@ -32,6 +39,23 @@ void ofApp::keyPressed(int key) {
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key) {
 	player.SetCurrentDirection(0);
+}
+
+void ofApp::LoadRectangles()
+{
+	player_rect.setX(player.GetX());
+	player_rect.setY(player.GetY());
+	player_rect.setSize(32, 32);
+
+	npc_rect.setX(npc.GetX());
+	npc_rect.setY(npc.GetY());
+	npc_rect.setSize(32, 32);
+}
+
+void ofApp::UpdatePlayerRectangle()
+{
+	player_rect.setX(player.GetX());
+	player_rect.setY(player.GetY());
 }
 
 //--------------------------------------------------------------

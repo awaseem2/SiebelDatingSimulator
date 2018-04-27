@@ -12,8 +12,9 @@ class ofApp : public ofBaseApp {
 private:
 	Map map;
 	Npc npc;
+	ofRectangle npc_rect;
 	Player player;
-	ofImage angrave;
+	ofRectangle player_rect;
 	
 public:
 	void setup();
@@ -32,4 +33,6 @@ public:
 	void dragEvent(ofDragInfo dragInfo);
 	void gotMessage(ofMessage msg);
 
+	void LoadRectangles();
+	void UpdatePlayerRectangle();
 };

@@ -11,7 +11,6 @@ void Npc::LoadNpc(const std::string & file_name)
 
 	for (auto phrase : all_phrases)
 	{
-
 		phrases_.push_back(phrase.attribute("Message").value());
 	}
 
@@ -24,4 +23,18 @@ void Npc::DrawNpc()
 	npc_image.draw(pos_x, pos_y);
 }
 
+void Npc::DrawMessage()
+{
+	
+}
+
+int Npc::GetX()
+{
+	return pos_x;
+}
+
+int Npc::GetY()
+{
+	return pos_y;
+}
 

@@ -20,5 +20,8 @@ private:
 public:
 	void LoadNpc(const std::string &file_name);
 	void DrawNpc();
+	void DrawMessage();
+	int GetX();
+	int GetY();
 };
 
