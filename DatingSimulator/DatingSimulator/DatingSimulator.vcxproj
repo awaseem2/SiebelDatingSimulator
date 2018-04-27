@@ -181,12 +181,14 @@
     <ClCompile Include="src\ofApp.cpp" />
     <ClCompile Include="src\player.cpp" />
     <ClCompile Include="src\tile.cpp" />
+    <ClCompile Include="utilities.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\map.h" />
     <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="src\player.h" />
     <ClInclude Include="src\tile.h" />
+    <ClInclude Include="utilities.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="$(OF_ROOT)\libs\openFrameworksCompiled\project\vs\openframeworksLib.vcxproj">
