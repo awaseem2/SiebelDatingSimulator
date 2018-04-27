@@ -7,8 +7,9 @@ I've been struggling a lot with making certain tiles not able to be walked throu
 
 # Week of April 21st
 
-Certain border and wall tiles are no longer able to be walked through. The file paths of images are no longer hard coded and are now
-read in from an xml file. This change allows for more rooms to be added in the future without and hassle. I decided to use pugi for reading the xml file since it seemed really simple to use and is fairly popular which makes debugging easier.
+Certain border and wall tiles are no longer able to be walked through. 
+
+The file paths of images are no longer hard coded and are now read in from an xml file. This change allows for more rooms to be added in the future without any hassle. I decided to use pugi for reading the xml file since it seemed really simple to use and is fairly popular which makes debugging easier.
 
 I created an npc class which reads in phrases from the xml file, and I created "collision detection" between the npc and player. 
 
