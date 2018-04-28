@@ -10,9 +10,11 @@ class Map
 {
 private:
 	vector<Tile> tiles;
+	int width = 32;
+	int height = 32;
+	int kTileSize = 32;
 
 public:
 	void LoadMap(const std::string &file_name);
-	void DrawMap();
 	vector<Tile> GetTiles();
 };

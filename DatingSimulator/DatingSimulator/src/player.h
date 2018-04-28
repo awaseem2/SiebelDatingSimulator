@@ -8,18 +8,20 @@ class Player
 private:
 	ofImage character;
 	PlayerDirection current_direction_ = kNone;
-	//int pos_x = 8 * 32 + 8; // + 8 accounting for offset to be in middle of tile
-	//int pos_y = 6 * 32; 
-	int pos_x = 3 * 32 + 8;
-	int pos_y = 5 * 32;
-	int kTileSize = 32;
+	int pos_x = 12 * 32 + 8; // + 8 accounting for offset to be in middle of tile
+	int pos_y = 12 * 32; 
+	//int pos_x = 3 * 32 + 8;
+	//int pos_y = 5 * 32;
+	int kTileSize = 1;
+	int offset = -8;
+	ofRectangle player_rect;
 
 public:
 	void LoadCharacter();
 	void DrawCharacter();
 	void UpdatePosition(Map map);
 	void SetCurrentDirection(int direction);
+	std::tuple<int, int> GetNewCoordinates(int key);
 	int GetX();
 	int GetY();
-	std::tuple<int, int> GetNewCoordinates(int key);
 };

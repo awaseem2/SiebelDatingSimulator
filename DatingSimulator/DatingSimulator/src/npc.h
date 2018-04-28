@@ -3,6 +3,7 @@
 #include "pugixml.hpp"
 #include <string>
 #include <vector>
+#include "ofxCenteredTrueTypeFont.h"
 
 using std::vector;
 
@@ -13,16 +14,18 @@ private:
 	vector<std::string> phrases_; 
 	pugi::xml_node curr_room;
 	pugi::xml_node npc;
-	//pugi::xml_object_range<pugi::xml_named_node_iterator> all_phrases;
-	ofImage npc_image;
-	int pos_x = 64 + 8;
-	int pos_y = 192;
-	int message_number = 0;
+	ofImage npc_image_;
+	int pos_x_ = 0;
+	int pos_y_ = 0;
+	int message_index = 0;
+	ofxCenteredTrueTypeFont message_;
 
 public:
 	void LoadNpc(const std::string &file_name);
 	void DrawNpc();
 	void DrawMessage();
+	void SetMessageIndex();
+	int GetRandInt();
 	int GetX();
 	int GetY();
 };

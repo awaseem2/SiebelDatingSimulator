@@ -4,6 +4,9 @@
 void Player::LoadCharacter()
 {
 	character.load("../data/MainCharacter.png");
+	player_rect.setX(pos_x);
+	player_rect.setY(pos_y);
+	player_rect.setSize(32, 32);
 }
 
 void Player::DrawCharacter()
@@ -14,35 +17,27 @@ void Player::DrawCharacter()
 void Player::UpdatePosition(Map map)
 {
 	std::tuple<int, int> new_coordinates = GetNewCoordinates(current_direction_);
-	int new_x = std::get<0>(new_coordinates);
-	int new_y = std::get<1>(new_coordinates);
-	int x_modified = (new_x - 8);
-	int x_coord = x_modified / 32;
+	int new_x = std::get<0>(new_coordinates) + offset;
+	int new_y = std::get<1>(new_coordinates) + offset;
+	int x_coord = new_x / 32;
 	int y_coord = (new_y - 32) / 32;
 	int tile_number = (15 * y_coord) + x_coord;
 	Tile next_tile = map.GetTiles()[tile_number];
+	ofRectangle next_tile_rect = next_tile.GetRectangle();
 
 	if (next_tile.CanWalkThrough())
 	{
-		pos_x = new_x;
-		pos_y = new_y;
-	}
+		pos_x = new_x - offset;
+		pos_y = new_y - offset;
 
+		player_rect.setX(pos_x);
+		player_rect.setY(pos_y);
+	}
 }
 
 void Player::SetCurrentDirection(int direction)
 {
 	current_direction_ = static_cast<PlayerDirection>(direction);
-}
-
-int Player::GetX()
-{
-	return pos_x;
-}
-
-int Player::GetY()
-{
-	return pos_y;
 }
 
 std::tuple<int, int> Player::GetNewCoordinates(int key)
@@ -70,4 +65,14 @@ std::tuple<int, int> Player::GetNewCoordinates(int key)
 	}
 
 	return std::make_tuple(new_x, new_y);
+}
+
+int Player::GetX()
+{
+	return pos_x;
+}
+
+int Player::GetY()
+{
+	return pos_y;
 }

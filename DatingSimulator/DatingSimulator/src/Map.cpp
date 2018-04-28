@@ -21,18 +21,9 @@ void Map::LoadMap(const std::string &file_name)
 		for (int col = 0; col < number_of_cols; col++)
 		{
 			file >> curr_coordinates;
-			Tile tile((curr_coordinates[0] - '0') * 32, (curr_coordinates[2] - '0') * 32, (col) * 32, (row) * 32,
-				32, 32, curr_coordinates[3], tile_sheet_path);
+			Tile tile((col) * kTileSize, (row) * kTileSize, width, height, curr_coordinates[0], tile_sheet_path);
 			tiles.push_back(tile);
 		}
-	}
-}
-
-void Map::DrawMap()
-{
-	for (auto tile : tiles)
-	{
-		tile.Draw();
 	}
 }
 

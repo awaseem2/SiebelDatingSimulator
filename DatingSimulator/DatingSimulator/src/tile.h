@@ -12,15 +12,11 @@ private:
 	int y_;
 	int width_;
 	int height_;
-	int uv_x_;
-	int uv_y_;
 	bool can_walk_through;
-	bool npc;
 
 public:
-	Tile(int uv_x, int uv_y, int x, int y, int width, int height, char collision_type, string tile_sheet);
-	void Draw();
+	Tile(int x, int y, int width, int height, char collision_type, string tile_sheet);
 	bool CanWalkThrough();
-	bool ContainsNpc();
+	ofRectangle GetRectangle();
 };
 

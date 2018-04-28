@@ -8,6 +8,7 @@ void ofApp::setup() {
 	npc.LoadNpc("C:/Users/aly53/Downloads/openFrameworks/of_v0.9.8_vs_release/126 Final Project/DatingSimulator/DatingSimulator/bin/data/assets/MapLayout.xml");
 	player.LoadCharacter();
 	LoadRectangles();
+	map_image.load("assets/OutsideSiebelMap.png");
 }
 
 //--------------------------------------------------------------
@@ -22,14 +23,16 @@ void ofApp::update() {
 	else
 	{
 		draw_npc_message = false;
+		npc.SetMessageIndex();
 	}
+
 }
 
 //--------------------------------------------------------------
 void ofApp::draw() {
-	map.DrawMap();
-	player.DrawCharacter();
+	map_image.draw(8, 32);
 	npc.DrawNpc();
+	player.DrawCharacter();
 
 	if (draw_npc_message)
 	{

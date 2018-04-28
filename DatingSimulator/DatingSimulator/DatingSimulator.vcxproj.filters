@@ -21,6 +21,12 @@
     <Filter Include="addons">
       <UniqueIdentifier>{abae99d8-b750-4f54-8cae-b9a22efec786}</UniqueIdentifier>
     </Filter>
+    <Filter Include="addons\ofxCenteredTrueTypeFont">
+      <UniqueIdentifier>{c4365ae7-50e3-4aab-8b09-807368a87b83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxCenteredTrueTypeFont\src">
+      <UniqueIdentifier>{2cbbcd1e-f53b-410b-895a-d8a05eddbda0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ofApp.h">
@@ -32,6 +38,9 @@
     <ClInclude Include="src\map.h" />
     <ClInclude Include="src\player.h" />
     <ClInclude Include="src\npc.h" />
+    <ClInclude Include="..\..\..\addons\ofxCenteredTrueTypeFont\src\ofxCenteredTrueTypeFont.h">
+      <Filter>addons\ofxCenteredTrueTypeFont\src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />
