@@ -11,7 +11,8 @@ Certain border and wall tiles are no longer able to be walked through.
 
 The file paths of images are no longer hard coded and are now read in from an xml file. This change allows for more rooms to be added in the future without any hassle. I decided to use pugi for reading the xml file since it seemed really simple to use and is fairly popular which makes debugging easier.
 
-I created an npc class which reads in phrases from the xml file, and I created "collision detection" between the npc and player. 
+I created an npc class which reads in phrases from the xml file, and I created "collision detection" between the npc and player.  When
+the player collides with an npc, it prints one of the npc's images on the screen. This goes away when the player moves away.
 
 I also changed how the character walks a little. I added enums of the "direction" the player is facing which makes the code easier to read.
 and it makes sense to change the player's direction in update rather than doing everything in the draw method.
