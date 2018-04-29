@@ -207,12 +207,15 @@ C:\Users\aly53\Downloads\openFrameworks\of_v0.9.8_vs_release\addons\ofxCenteredT
     <Image Include="bin\data\assets\OutsideSiebelTileSheet.png" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="bin\data\assets\OutsideSiebel.txt">
+    <Text Include="bin\data\assets\OutsideSiebelCollision.txt">
       <DeploymentContent>true</DeploymentContent>
     </Text>
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="bin\data\assets\MapLayout.xml" />
+    <Xml Include="bin\data\assets\OutsideSiebel.xml" />
+    <Xml Include="bin\data\assets\SiebelEntry.xml">
+      <SubType>Designer</SubType>
+    </Xml>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ProjectExtensions>

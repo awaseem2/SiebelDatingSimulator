@@ -4,11 +4,12 @@
 void ofApp::setup() {
 	ofSetWindowTitle("Siebel Dating Simulator");
 	ofBackground(255, 255, 255);
-	map.LoadMap("C:/Users/aly53/Downloads/openFrameworks/of_v0.9.8_vs_release/126 Final Project/DatingSimulator/DatingSimulator/bin/data/assets/MapLayout.xml");
-	npc.LoadNpc("C:/Users/aly53/Downloads/openFrameworks/of_v0.9.8_vs_release/126 Final Project/DatingSimulator/DatingSimulator/bin/data/assets/MapLayout.xml");
+
 	player.LoadCharacter();
+	map.LoadMap("C:/Users/aly53/Downloads/openFrameworks/of_v0.9.8_vs_release/126 Final Project/DatingSimulator/DatingSimulator/bin/data/assets/OutsideSiebel.xml");
+	npc.LoadNpc("C:/Users/aly53/Downloads/openFrameworks/of_v0.9.8_vs_release/126 Final Project/DatingSimulator/DatingSimulator/bin/data/assets/OutsideSiebel.xml");
+	
 	LoadRectangles();
-	map_image.load("assets/OutsideSiebelMap.png");
 }
 
 //--------------------------------------------------------------
@@ -26,12 +27,20 @@ void ofApp::update() {
 		npc.SetMessageIndex();
 	}
 
+	if (player.MoveToNextRoom())
+	{
+		player.SetMoveToNextRoom(false);
+		map.LoadMap(map.GetNextRoom());
+		npc.LoadNpc(map.GetNextRoom());
+	}
+
 }
 
 //--------------------------------------------------------------
 void ofApp::draw() {
-	map_image.draw(8, 32);
+	map.DrawMap();
 	npc.DrawNpc();
+	npc.DrawItems();
 	player.DrawCharacter();
 
 	if (draw_npc_message)

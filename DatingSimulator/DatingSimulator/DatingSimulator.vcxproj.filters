@@ -10,9 +10,15 @@
     <ClCompile Include="src\tile.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\Map.cpp" />
-    <ClCompile Include="src\player.cpp" />
-    <ClCompile Include="src\Npc.cpp" />
+    <ClCompile Include="src\Map.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Npc.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\player.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -35,11 +41,17 @@
     <ClInclude Include="src\tile.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\map.h" />
-    <ClInclude Include="src\player.h" />
-    <ClInclude Include="src\npc.h" />
     <ClInclude Include="..\..\..\addons\ofxCenteredTrueTypeFont\src\ofxCenteredTrueTypeFont.h">
       <Filter>addons\ofxCenteredTrueTypeFont\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\map.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\npc.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\player.h">
+      <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -49,9 +61,10 @@
     <Image Include="bin\data\assets\OutsideSiebelTileSheet.png" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="bin\data\assets\OutsideSiebel.txt" />
+    <Xml Include="bin\data\assets\SiebelEntry.xml" />
+    <Xml Include="bin\data\assets\OutsideSiebel.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="bin\data\assets\MapLayout.xml" />
+    <Text Include="bin\data\assets\OutsideSiebelCollision.txt" />
   </ItemGroup>
 </Project>

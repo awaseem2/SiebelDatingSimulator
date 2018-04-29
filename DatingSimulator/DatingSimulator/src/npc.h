@@ -18,12 +18,14 @@ private:
 	int pos_x_ = 0;
 	int pos_y_ = 0;
 	int message_index = 0;
+	bool npc_exists = false;
 	ofxCenteredTrueTypeFont message_;
 
 public:
 	void LoadNpc(const std::string &file_name);
 	void DrawNpc();
 	void DrawMessage();
+	void DrawItems();
 	void SetMessageIndex();
 	int GetRandInt();
 	int GetX();

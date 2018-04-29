@@ -10,7 +10,6 @@ using std::vector;
 class ofApp : public ofBaseApp {
 
 private:
-	ofImage map_image;
 	Map map;
 	Npc npc;
 	ofRectangle npc_rect;

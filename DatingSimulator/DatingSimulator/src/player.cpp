@@ -7,6 +7,7 @@ void Player::LoadCharacter()
 	player_rect.setX(pos_x);
 	player_rect.setY(pos_y);
 	player_rect.setSize(32, 32);
+	curr_room_name = "Outside Siebel";
 }
 
 void Player::DrawCharacter()
@@ -32,6 +33,13 @@ void Player::UpdatePosition(Map map)
 
 		player_rect.setX(pos_x);
 		player_rect.setY(pos_y);
+
+		if (next_tile.NextRoom())
+		{
+			move_to_next_room = true;
+			pos_x = 12 * 32 + 8;
+			pos_y = 12 * 32;
+		}
 	}
 }
 
@@ -75,4 +83,23 @@ int Player::GetX()
 int Player::GetY()
 {
 	return pos_y;
+}
+
+void Player::SetCurrentRoomName()
+{
+}
+
+string Player::GetCurrentRoomName()
+{
+	return curr_room_name;
+}
+
+bool Player::MoveToNextRoom()
+{
+	return move_to_next_room;
+}
+
+void Player::SetMoveToNextRoom(bool next)
+{
+	move_to_next_room = next;
 }

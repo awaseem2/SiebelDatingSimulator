@@ -6,24 +6,38 @@ void Npc::LoadNpc(const std::string & file_name)
 	doc.load_file(file_name.c_str());
 
 	curr_room = doc.first_child();
+
 	npc = curr_room.first_child();
-	auto all_phrases = npc.children("Phrase");
 
-	for (auto phrase : all_phrases)
+	if (npc.empty())
 	{
-		phrases_.push_back(phrase.attribute("Message").value());
+		npc_exists = false;
 	}
+	else
+	{
+		npc_exists = true;
 
-	auto path = npc.attribute("Path").value();
-	npc_image_.load(path);
+		auto all_phrases = npc.children("Phrase");
 
-	pos_x_ = npc.attribute("x").as_int();
-	pos_y_ = npc.attribute("y").as_int();
+		for (auto phrase : all_phrases)
+		{
+			phrases_.push_back(phrase.attribute("Message").value());
+		}
+
+		auto path = npc.attribute("Path").value();
+		npc_image_.load(path);
+
+		pos_x_ = npc.attribute("x").as_int();
+		pos_y_ = npc.attribute("y").as_int();
+	}
 }
 
 void Npc::DrawNpc()
 {
-	npc_image_.draw(pos_x_, pos_y_);
+	if (npc_exists)
+	{
+		npc_image_.draw(pos_x_, pos_y_);
+	}
 }
 
 void Npc::DrawMessage()
@@ -41,6 +55,17 @@ void Npc::DrawMessage()
 	//reset color to prevent entire screen from being filled
 	ofEnableAlphaBlending();
 	ofSetColor(255, 255, 255, 255);
+}
+
+void Npc::DrawItems()
+{
+	//auto all_items = npc.children("Item");
+	//for (auto item : all_items)
+	//{
+	//	ofImage item_image;
+	//	item_image.load(item.attribute("Path").value());
+	//	item_image.draw(item.attribute("x").as_int(), item.attribute("y").as_int());
+	//}
 }
 
 void Npc::SetMessageIndex()

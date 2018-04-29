@@ -1,11 +1,10 @@
 #include "tile.h"
 
-Tile::Tile(int x, int y, int width, int height, char collision_type, string tile_sheet) :
+Tile::Tile(int x, int y, int width, int height, char collision_type) :
 	x_(x),
 	y_(y),
 	width_(width),
-	height_(height),
-	tile_sheet_(tile_sheet)
+	height_(height)
 {
 	if (collision_type == '*')
 	{
@@ -14,12 +13,23 @@ Tile::Tile(int x, int y, int width, int height, char collision_type, string tile
 	else
 	{
 		can_walk_through = true;
+
+		if (collision_type == '+')
+		{
+			next_room = true;
+
+		}
 	}
 }
 
 bool Tile::CanWalkThrough()
 {
 	return can_walk_through;
+}
+
+bool Tile::NextRoom()
+{
+	return next_room;
 }
 
 ofRectangle Tile::GetRectangle()
