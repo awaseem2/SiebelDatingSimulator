@@ -15,8 +15,8 @@ private:
 	int kTileSize = 1;
 	int offset = -8;
 	ofRectangle player_rect;
-	string curr_room_name;
 	bool move_to_next_room = false;
+	bool move_to_previous_room = false;
 
 public:
 	void LoadCharacter();
@@ -26,8 +26,8 @@ public:
 	std::tuple<int, int> GetNewCoordinates(int key);
 	int GetX();
 	int GetY();
-	void SetCurrentRoomName();
-	string GetCurrentRoomName();
 	bool MoveToNextRoom();
 	void SetMoveToNextRoom(bool next);
+	bool MoveToPreviousRoom();
+	void SetMoveToPreviousRoom(bool prev);
 };

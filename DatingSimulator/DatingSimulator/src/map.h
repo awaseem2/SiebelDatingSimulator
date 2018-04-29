@@ -16,10 +16,12 @@ private:
 	ofImage map_image_;
 	std::string map_collisions;
 	std::string next_room;
+	std::string previous_room;
 
 public:
 	void LoadMap(const std::string &file_name);
 	vector<Tile> GetTiles();
 	void DrawMap();
 	std::string GetNextRoom();
+	std::string GetPreviousRoom();
 };

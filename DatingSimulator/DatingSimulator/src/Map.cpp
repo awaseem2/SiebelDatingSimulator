@@ -12,6 +12,7 @@ void Map::LoadMap(const std::string &file_name)
 	map_collisions = first_node.attribute("Collisions").value();
 	map_image_.load(first_node.attribute("MapImagePath").value());
 	next_room = first_node.attribute("NextRoom").value();
+	previous_room = first_node.attribute("PreviousRoom").value();
 
 	int number_of_rows = first_node.attribute("Rows").as_int();
 	int number_of_cols = first_node.attribute("Columns").as_int();
@@ -44,4 +45,9 @@ void Map::DrawMap()
 std::string Map::GetNextRoom()
 {
 	return next_room;
+}
+
+std::string Map::GetPreviousRoom()
+{
+	return previous_room;
 }

@@ -19,6 +19,10 @@ Tile::Tile(int x, int y, int width, int height, char collision_type) :
 			next_room = true;
 
 		}
+		if (collision_type == '-')
+		{
+			previous_room = true;
+		}
 	}
 }
 
@@ -30,6 +34,11 @@ bool Tile::CanWalkThrough()
 bool Tile::NextRoom()
 {
 	return next_room;
+}
+
+bool Tile::PreviousRoom()
+{
+	return previous_room;
 }
 
 ofRectangle Tile::GetRectangle()

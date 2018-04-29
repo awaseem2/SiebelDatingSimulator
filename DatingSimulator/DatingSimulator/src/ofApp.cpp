@@ -3,7 +3,7 @@
 //--------------------------------------------------------------
 void ofApp::setup() {
 	ofSetWindowTitle("Siebel Dating Simulator");
-	ofBackground(255, 255, 255);
+	ofBackground(0, 0, 0);
 
 	player.LoadCharacter();
 	map.LoadMap("C:/Users/aly53/Downloads/openFrameworks/of_v0.9.8_vs_release/126 Final Project/DatingSimulator/DatingSimulator/bin/data/assets/OutsideSiebel.xml");
@@ -32,6 +32,12 @@ void ofApp::update() {
 		player.SetMoveToNextRoom(false);
 		map.LoadMap(map.GetNextRoom());
 		npc.LoadNpc(map.GetNextRoom());
+	}
+	else if (player.MoveToPreviousRoom())
+	{
+		player.SetMoveToPreviousRoom(false);
+		map.LoadMap(map.GetPreviousRoom());
+		npc.LoadNpc(map.GetPreviousRoom());
 	}
 
 }
