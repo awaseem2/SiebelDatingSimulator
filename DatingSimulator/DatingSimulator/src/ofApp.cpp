@@ -7,37 +7,32 @@ void ofApp::setup() {
 
 	player.LoadCharacter();
 	map.LoadMap("C:/Users/aly53/Downloads/openFrameworks/of_v0.9.8_vs_release/126 Final Project/DatingSimulator/DatingSimulator/bin/data/assets/OutsideSiebel.xml");
-	npc.LoadNpc("C:/Users/aly53/Downloads/openFrameworks/of_v0.9.8_vs_release/126 Final Project/DatingSimulator/DatingSimulator/bin/data/assets/OutsideSiebel.xml");
-	
-	LoadRectangles();
 }
 
 //--------------------------------------------------------------
 void ofApp::update() {
 	player.UpdatePosition(map);
-	UpdatePlayerRectangle();
 
-	if (player_rect.intersects(npc_rect))
+	if (player.TalkToNpc())
 	{
 		draw_npc_message = true;
+		player.SetTalkToNpc(false);
 	}
 	else
 	{
 		draw_npc_message = false;
-		npc.SetMessageIndex();
+		//map.GetNpc().SetMessageIndex();
 	}
 
 	if (player.MoveToNextRoom())
 	{
 		player.SetMoveToNextRoom(false);
 		map.LoadMap(map.GetNextRoom());
-		npc.LoadNpc(map.GetNextRoom());
 	}
 	else if (player.MoveToPreviousRoom())
 	{
 		player.SetMoveToPreviousRoom(false);
 		map.LoadMap(map.GetPreviousRoom());
-		npc.LoadNpc(map.GetPreviousRoom());
 	}
 
 }
@@ -45,13 +40,12 @@ void ofApp::update() {
 //--------------------------------------------------------------
 void ofApp::draw() {
 	map.DrawMap();
-	npc.DrawNpc();
-	npc.DrawItems();
+	//npc.DrawItems();
 	player.DrawCharacter();
 
 	if (draw_npc_message)
 	{
-		npc.DrawMessage();
+		map.GetNpc().DrawMessage();
 	}
 }
 
@@ -66,23 +60,6 @@ void ofApp::keyPressed(int key) {
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key) {
 	player.SetCurrentDirection(0);
-}
-
-void ofApp::LoadRectangles()
-{
-	player_rect.setX(player.GetX());
-	player_rect.setY(player.GetY());
-	player_rect.setSize(32, 32);
-
-	npc_rect.setX(npc.GetX());
-	npc_rect.setY(npc.GetY());
-	npc_rect.setSize(32, 32);
-}
-
-void ofApp::UpdatePlayerRectangle()
-{
-	player_rect.setX(player.GetX());
-	player_rect.setY(player.GetY());
 }
 
 //--------------------------------------------------------------

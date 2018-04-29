@@ -14,9 +14,9 @@ private:
 	//int pos_y = 5 * 32;
 	int kTileSize = 1;
 	int offset = -8;
-	ofRectangle player_rect;
 	bool move_to_next_room = false;
 	bool move_to_previous_room = false;
+	bool talk_to_npc = false;
 
 public:
 	void LoadCharacter();
@@ -30,4 +30,6 @@ public:
 	void SetMoveToNextRoom(bool next);
 	bool MoveToPreviousRoom();
 	void SetMoveToPreviousRoom(bool prev);
+	bool TalkToNpc();
+	void SetTalkToNpc(bool talk);
 };

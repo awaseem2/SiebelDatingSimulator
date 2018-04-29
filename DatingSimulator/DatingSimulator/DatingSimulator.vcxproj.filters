@@ -19,6 +19,7 @@
     <ClCompile Include="src\player.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\Item.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -53,6 +54,7 @@
     <ClInclude Include="src\player.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="src\item.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />

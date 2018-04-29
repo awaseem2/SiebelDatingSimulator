@@ -4,9 +4,6 @@
 void Player::LoadCharacter()
 {
 	character.load("../data/MainCharacter.png");
-	player_rect.setX(pos_x);
-	player_rect.setY(pos_y);
-	player_rect.setSize(32, 32);
 }
 
 void Player::DrawCharacter()
@@ -25,27 +22,25 @@ void Player::UpdatePosition(Map map)
 	Tile next_tile = map.GetTiles()[tile_number];
 	ofRectangle next_tile_rect = next_tile.GetRectangle();
 
-	if (next_tile.CanWalkThrough())
+	if (next_tile.NextRoom())
+	{
+		move_to_next_room = true;
+		pos_x = 11 * 32 + 8;
+		pos_y = 11 * 32;
+	}
+	else if (next_tile.PreviousRoom())
+	{
+		move_to_previous_room = true;
+		pos_x = 2 * 32 + 8;
+		pos_y = 4 * 32;
+	}
+	else if (next_tile.CanWalkThrough())
 	{
 		pos_x = new_x - offset;
 		pos_y = new_y - offset;
-
-		player_rect.setX(pos_x);
-		player_rect.setY(pos_y);
-
-		if (next_tile.NextRoom())
-		{
-			move_to_next_room = true;
-			pos_x = 12 * 32 + 8;
-			pos_y = 11 * 32;
-		}
-		else if (next_tile.PreviousRoom())
-		{
-			move_to_previous_room = true;
-			pos_x = 2 * 32 + 8;
-			pos_y = 4 * 32;
-		}
 	}
+
+	talk_to_npc = next_tile.HasNpc();
 }
 
 void Player::SetCurrentDirection(int direction)
@@ -108,4 +103,14 @@ bool Player::MoveToPreviousRoom()
 void Player::SetMoveToPreviousRoom(bool prev)
 {
 	move_to_previous_room = prev;
+}
+
+bool Player::TalkToNpc()
+{
+	return talk_to_npc;
+}
+
+void Player::SetTalkToNpc(bool talk)
+{
+	talk_to_npc = talk;
 }

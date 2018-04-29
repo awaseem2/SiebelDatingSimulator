@@ -17,12 +17,7 @@ void Npc::LoadNpc(const std::string & file_name)
 	{
 		npc_exists = true;
 
-		auto all_phrases = npc.children("Phrase");
-
-		for (auto phrase : all_phrases)
-		{
-			phrases_.push_back(phrase.attribute("Message").value());
-		}
+		greeting = npc.first_child().text().as_string();
 
 		auto path = npc.attribute("Path").value();
 		npc_image_.load(path);
@@ -42,15 +37,9 @@ void Npc::DrawNpc()
 
 void Npc::DrawMessage()
 {	
-	ofSetColor(ofColor::white);
-	ofDrawRectangle(pos_x_, pos_y_ + 32 * 5 + 8, 32 * 11, 32 * 2 + 8);
-	
 	ofSetColor(255, 255, 255);
-	message_.loadFont("pacman_font.ttf", 32);
-	message_.drawCenteredBoundingBox(phrases_[message_index], pos_x_, pos_y_ + 32 * 6 + 8, 10);
-
-	/*string message = phrases_[message_index];
-	ofDrawBitmapString(message, pos_x_ + 32, pos_y_ + 32 * 6 + 8);*/
+	message_.loadFont("pacman_font.ttf", 40);
+	message_.drawStringCentered(greeting, ofVec2f(32 * 20, 32 * 4 + 8));
 
 	//reset color to prevent entire screen from being filled
 	ofEnableAlphaBlending();
@@ -66,19 +55,6 @@ void Npc::DrawItems()
 	//	item_image.load(item.attribute("Path").value());
 	//	item_image.draw(item.attribute("x").as_int(), item.attribute("y").as_int());
 	//}
-}
-
-void Npc::SetMessageIndex()
-{
-	message_index = GetRandInt();
-}
-
-int Npc::GetRandInt()
-{
-	int min = 0;
-	int max = phrases_.size() - 1;
-	int random = min + (rand() % static_cast<int>(max - min + 1));
-	return random;
 }
 
 int Npc::GetX()

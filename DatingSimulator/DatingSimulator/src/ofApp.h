@@ -11,10 +11,7 @@ class ofApp : public ofBaseApp {
 
 private:
 	Map map;
-	Npc npc;
-	ofRectangle npc_rect;
 	Player player;
-	ofRectangle player_rect;
 	bool draw_npc_message = false;
 	
 public:
@@ -33,7 +30,4 @@ public:
 	void windowResized(int w, int h);
 	void dragEvent(ofDragInfo dragInfo);
 	void gotMessage(ofMessage msg);
-
-	void LoadRectangles();
-	void UpdatePlayerRectangle();
 };

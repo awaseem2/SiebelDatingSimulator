@@ -30,6 +30,8 @@ void Map::LoadMap(const std::string &file_name)
 		}
 	}
 
+	npc.LoadNpc(file_name);
+	item.LoadItem(file_name);
 }
 
 vector<Tile> Map::GetTiles()
@@ -40,6 +42,8 @@ vector<Tile> Map::GetTiles()
 void Map::DrawMap()
 {
 	map_image_.draw(8, 32);
+	npc.DrawNpc();
+	item.DrawItem();
 }
 
 std::string Map::GetNextRoom()
@@ -50,4 +54,9 @@ std::string Map::GetNextRoom()
 std::string Map::GetPreviousRoom()
 {
 	return previous_room;
+}
+
+Npc Map::GetNpc()
+{
+	return npc;
 }

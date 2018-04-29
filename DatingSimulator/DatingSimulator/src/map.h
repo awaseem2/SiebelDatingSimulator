@@ -1,6 +1,8 @@
 #pragma once
 #include "tile.h"
 #include "pugixml.hpp"
+#include "npc.h"
+#include "item.h"
 #include <string>
 #include <vector>
 
@@ -9,6 +11,8 @@ using std::vector;
 class Map
 {
 private:
+	Npc npc;
+	Item item;
 	vector<Tile> tiles;
 	int width = 32;
 	int height = 32;
@@ -24,4 +28,5 @@ public:
 	void DrawMap();
 	std::string GetNextRoom();
 	std::string GetPreviousRoom();
+	Npc GetNpc();
 };

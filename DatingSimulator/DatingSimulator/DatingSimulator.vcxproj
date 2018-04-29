@@ -176,6 +176,7 @@ C:\Users\aly53\Downloads\openFrameworks\of_v0.9.8_vs_release\addons\ofxCenteredT
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Item.cpp" />
     <ClCompile Include="src\Npc.cpp" />
     <ClCompile Include="src\Map.cpp" />
     <ClCompile Include="src\main.cpp" />
@@ -185,6 +186,7 @@ C:\Users\aly53\Downloads\openFrameworks\of_v0.9.8_vs_release\addons\ofxCenteredT
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\addons\ofxCenteredTrueTypeFont\src\ofxCenteredTrueTypeFont.h" />
+    <ClInclude Include="src\item.h" />
     <ClInclude Include="src\npc.h" />
     <ClInclude Include="src\map.h" />
     <ClInclude Include="src\ofApp.h" />
@@ -212,7 +214,9 @@ C:\Users\aly53\Downloads\openFrameworks\of_v0.9.8_vs_release\addons\ofxCenteredT
     </Text>
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="bin\data\assets\OutsideSiebel.xml" />
+    <Xml Include="bin\data\assets\OutsideSiebel.xml">
+      <SubType>Designer</SubType>
+    </Xml>
     <Xml Include="bin\data\assets\SiebelEntry.xml">
       <SubType>Designer</SubType>
     </Xml>

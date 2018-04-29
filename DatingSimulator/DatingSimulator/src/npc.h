@@ -11,7 +11,7 @@ class Npc
 {
 
 private:
-	vector<std::string> phrases_; 
+	std::string greeting; 
 	pugi::xml_node curr_room;
 	pugi::xml_node npc;
 	ofImage npc_image_;
