@@ -21,7 +21,6 @@ void ofApp::update() {
 	else
 	{
 		draw_npc_message = false;
-		//map.GetNpc().SetMessageIndex();
 	}
 
 	if (player.MoveToNextRoom())
@@ -40,7 +39,6 @@ void ofApp::update() {
 //--------------------------------------------------------------
 void ofApp::draw() {
 	map.DrawMap();
-	//npc.DrawItems();
 	player.DrawCharacter();
 
 	if (draw_npc_message)

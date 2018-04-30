@@ -5,12 +5,15 @@
 #include "item.h"
 #include <string>
 #include <vector>
+#include <tuple>
 
 using std::vector;
+using std::tuple;
 
 class Map
 {
 private:
+	pugi::xml_node map;
 	Npc npc;
 	Item item;
 	vector<Tile> tiles;
@@ -21,12 +24,16 @@ private:
 	std::string map_collisions;
 	std::string next_room;
 	std::string previous_room;
+	tuple<int, int> next_room_coordinates;
+	tuple<int, int> previous_room_coordinates;
 
 public:
 	void LoadMap(const std::string &file_name);
 	vector<Tile> GetTiles();
 	void DrawMap();
 	std::string GetNextRoom();
+	tuple<int, int> GetNextRoomCoordinates();
 	std::string GetPreviousRoom();
+	tuple<int, int> GetPreviousRoomCoordinates();
 	Npc GetNpc();
 };

@@ -39,22 +39,11 @@ void Npc::DrawMessage()
 {	
 	ofSetColor(255, 255, 255);
 	message_.loadFont("pacman_font.ttf", 40);
-	message_.drawStringCentered(greeting, ofVec2f(32 * 20, 32 * 4 + 8));
+	message_.drawStringCentered(greeting, ofVec2f(greeting_x_, greeting_y_));
 
 	//reset color to prevent entire screen from being filled
 	ofEnableAlphaBlending();
 	ofSetColor(255, 255, 255, 255);
-}
-
-void Npc::DrawItems()
-{
-	//auto all_items = npc.children("Item");
-	//for (auto item : all_items)
-	//{
-	//	ofImage item_image;
-	//	item_image.load(item.attribute("Path").value());
-	//	item_image.draw(item.attribute("x").as_int(), item.attribute("y").as_int());
-	//}
 }
 
 int Npc::GetX()

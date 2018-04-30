@@ -17,6 +17,8 @@ private:
 	ofImage npc_image_;
 	int pos_x_ = 0;
 	int pos_y_ = 0;
+	int  greeting_x_ = 32 * 20;
+	int greeting_y_ = 32 * 4 + 8;
 	int message_index = 0;
 	bool npc_exists = false;
 	ofxCenteredTrueTypeFont message_;
@@ -25,9 +27,6 @@ public:
 	void LoadNpc(const std::string &file_name);
 	void DrawNpc();
 	void DrawMessage();
-	void DrawItems();
-	void SetMessageIndex();
-	int GetRandInt();
 	int GetX();
 	int GetY();
 };

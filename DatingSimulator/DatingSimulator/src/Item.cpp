@@ -8,14 +8,26 @@ void Item::LoadItem(std::string file_name)
 	auto curr_room = doc.first_child();
 
 	auto item = curr_room.child("Item");
-	auto path = item.attribute("Path").value();
-	item_image_.load(path);
 
-	x_ = item.attribute("x").as_int();
-	y_ = item.attribute("y").as_int();
+	if (item.empty())
+	{
+		item_exists = false;
+	}
+	else
+	{
+		item_exists = true;
+		auto path = item.attribute("Path").value();
+		item_image_.load(path);
+
+		x_ = item.attribute("x").as_int();
+		y_ = item.attribute("y").as_int();
+	}
 }
 
 void Item::DrawItem()
 {
-	item_image_.draw(x_, y_);
+	if (item_exists)
+	{
+		item_image_.draw(x_, y_);
+	}
 }

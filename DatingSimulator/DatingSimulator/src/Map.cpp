@@ -6,16 +6,15 @@ void Map::LoadMap(const std::string &file_name)
 	pugi::xml_document doc;
 	doc.load_file(file_name.c_str());
 
-	auto first_node = doc.first_child();
+	map = doc.first_child();
 
-	std::string map_name = first_node.attribute("Name").value();
-	map_collisions = first_node.attribute("Collisions").value();
-	map_image_.load(first_node.attribute("MapImagePath").value());
-	next_room = first_node.attribute("NextRoom").value();
-	previous_room = first_node.attribute("PreviousRoom").value();
+	map_collisions = map.attribute("Collisions").value();
+	map_image_.load(map.attribute("MapImagePath").value());
+	next_room = map.attribute("NextRoomPath").value();
+	previous_room = map.attribute("PreviousRoomPath").value();
 
-	int number_of_rows = first_node.attribute("Rows").as_int();
-	int number_of_cols = first_node.attribute("Columns").as_int();
+	int number_of_rows = map.attribute("Rows").as_int();
+	int number_of_cols = map.attribute("Columns").as_int();
 
 	std::ifstream file(map_collisions);
 	std::string curr_coordinates;
@@ -32,6 +31,9 @@ void Map::LoadMap(const std::string &file_name)
 
 	npc.LoadNpc(file_name);
 	item.LoadItem(file_name);
+
+	next_room_coordinates = std::make_tuple(map.attribute("NextRoomX").as_int(), map.attribute("NextRoomY").as_int());
+	previous_room_coordinates = std::make_tuple(map.attribute("PreviousRoomX").as_int(), map.attribute("PreviousRoomY").as_int());
 }
 
 vector<Tile> Map::GetTiles()
@@ -51,9 +53,19 @@ std::string Map::GetNextRoom()
 	return next_room;
 }
 
+tuple<int, int> Map::GetNextRoomCoordinates()
+{
+	return next_room_coordinates;
+}
+
 std::string Map::GetPreviousRoom()
 {
 	return previous_room;
+}
+
+tuple<int, int> Map::GetPreviousRoomCoordinates()
+{
+	return previous_room_coordinates;
 }
 
 Npc Map::GetNpc()

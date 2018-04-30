@@ -4,11 +4,52 @@
 void Player::LoadCharacter()
 {
 	character.load("../data/MainCharacter.png");
+	charisma_.loadFont("pacman_font.ttf", 35);
+	romance_.loadFont("pacman_font.ttf", 35);
 }
 
 void Player::DrawCharacter()
 {
 	character.draw(pos_x, pos_y);
+	DrawInfoBars();
+}
+
+void Player::DrawInfoBars()
+{
+	ofSetColor(255, 255, 255);
+	charisma_.drawStringCentered("Charisma", ofVec2f(ofGetWindowWidth() - 32 * 7 - 16, ofGetWindowHeight() - 32 * 3 - 16));
+	romance_.drawStringCentered("Romance", ofVec2f(ofGetWindowWidth() - 32 * 7 - 16, ofGetWindowHeight() - 32 * 2));
+
+	int charisma_bar_length = 32 * 8;
+	ofDrawRectangle(ofGetWindowWidth() - (32 * 9), ofGetWindowHeight() - (32 * 3), 32 * 8, 16);
+	ofDrawRectangle(ofGetWindowWidth() - (32 * 9), ofGetWindowHeight() - (32 * 2) + 16, 32 * 8, 16);
+
+	if (charisma_pts > 100)
+	{
+		charisma_pts = 100;
+	}
+	else if(charisma_pts < 0)
+	{
+		charisma_pts = 0;
+	}
+
+	if (romance_pts > 100)
+	{
+		romance_pts = 100;
+	}
+	else if (romance_pts < 0)
+	{
+		romance_pts = 0;
+	}
+
+	ofSetColor(255, 0, 0);
+	int percent_charisma = (charisma_pts / 100.0) * charisma_bar_length;
+	int percent_romance = (romance_pts / 100.0) * charisma_bar_length;
+	ofDrawRectangle(ofGetWindowWidth() - (32 * 9), ofGetWindowHeight() - (32 * 3), percent_charisma, 16);
+	ofDrawRectangle(ofGetWindowWidth() - (32 * 9), ofGetWindowHeight() - (32 * 2) + 16, percent_romance, 16);
+
+	ofEnableAlphaBlending();
+	ofSetColor(255, 255, 255, 255);
 }
 
 void Player::UpdatePosition(Map map)
@@ -25,14 +66,14 @@ void Player::UpdatePosition(Map map)
 	if (next_tile.NextRoom())
 	{
 		move_to_next_room = true;
-		pos_x = 11 * 32 + 8;
-		pos_y = 11 * 32;
+		pos_x = std::get<0>(map.GetNextRoomCoordinates());
+		pos_y = std::get<1>(map.GetNextRoomCoordinates());
 	}
 	else if (next_tile.PreviousRoom())
 	{
 		move_to_previous_room = true;
-		pos_x = 2 * 32 + 8;
-		pos_y = 4 * 32;
+		pos_x = std::get<0>(map.GetPreviousRoomCoordinates());
+		pos_y = std::get<1>(map.GetPreviousRoomCoordinates());
 	}
 	else if (next_tile.CanWalkThrough())
 	{
