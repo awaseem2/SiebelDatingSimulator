@@ -21,6 +21,5 @@ public:
 	bool NextRoom();
 	bool PreviousRoom();
 	bool HasNpc();
-	ofRectangle GetRectangle();
 };
 

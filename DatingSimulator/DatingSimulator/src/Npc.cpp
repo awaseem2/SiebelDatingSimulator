@@ -33,10 +33,10 @@ void Npc::LoadNpc(const std::string & file_name)
 
 void Npc::LoadText()
 {
-	greeting_ttf.loadFont("pacman_font.ttf", 40);
-	option_1_ttf.loadFont("pacman_font.ttf", 38);
-	option_2_ttf.loadFont("pacman_font.ttf", 38);
-	outcome_ttf.loadFont("pacman_font.ttf", 40);
+	greeting_ttf.loadFont(GlobalConstants::kFontName, GlobalConstants::kBigTextSize);
+	option_1_ttf.loadFont(GlobalConstants::kFontName, GlobalConstants::kMediumTextSize);
+	option_2_ttf.loadFont(GlobalConstants::kFontName, GlobalConstants::kMediumTextSize);
+	outcome_ttf.loadFont(GlobalConstants::kFontName, GlobalConstants::kBigTextSize);
 }
 
 void Npc::LoadOptions()
@@ -83,7 +83,7 @@ void Npc::DrawMessage()
 		int charisma_change = std::get<0>(GetStatsChange());
 		int romance_change = std::get<1>(GetStatsChange());
 		ofxCenteredTrueTypeFont result_ttf;
-		result_ttf.loadFont("pacman_font.ttf", 35);
+		result_ttf.loadFont(GlobalConstants::kFontName, GlobalConstants::kSmallTextSize);
 
 		if (option_1_chosen)
 		{
@@ -95,7 +95,7 @@ void Npc::DrawMessage()
 		}
 
 		std::string result = std::to_string(charisma_change) + " charisma \n" + std::to_string(romance_change) + " romance";
-		result_ttf.drawStringCentered(result, greeting_x_, ofGetWindowHeight() - (32 * 5));
+		result_ttf.drawStringCentered(result, greeting_x_, ofGetWindowHeight() - GlobalConstants::kResultLabelY);
 	}
 
 	//reset color to prevent entire screen from being filled

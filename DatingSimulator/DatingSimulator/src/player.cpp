@@ -4,8 +4,8 @@
 void Player::LoadCharacter()
 {
 	character.load("../data/MainCharacter.png");
-	charisma_.loadFont("pacman_font.ttf", 35);
-	romance_.loadFont("pacman_font.ttf", 35);
+	charisma_.loadFont(GlobalConstants::kFontName, GlobalConstants::kSmallTextSize);
+	romance_.loadFont(GlobalConstants::kFontName, GlobalConstants::kSmallTextSize);
 }
 
 void Player::DrawCharacter()
@@ -16,38 +16,29 @@ void Player::DrawCharacter()
 
 void Player::DrawInfoBars()
 {
+	UpdateStats();
+
+	//Charisma and Romance labels
 	ofSetColor(255, 255, 255);
-	charisma_.drawStringCentered("Charisma", ofVec2f(ofGetWindowWidth() - 32 * 7 - 16, ofGetWindowHeight() - 32 * 3 - 16));
-	romance_.drawStringCentered("Romance", ofVec2f(ofGetWindowWidth() - 32 * 7 - 16, ofGetWindowHeight() - 32 * 2));
+	charisma_.drawStringCentered("Charisma", ofVec2f(ofGetWindowWidth() - GlobalConstants::kStatsLabelsX, 
+		ofGetWindowHeight() - GlobalConstants::kCharismaLabelY));
+	romance_.drawStringCentered("Romance", ofVec2f(ofGetWindowWidth() - GlobalConstants::kStatsLabelsX, 
+		ofGetWindowHeight() - GlobalConstants::kRomanceLabelY));
 
-	int charisma_bar_length = 32 * 8;
-	ofDrawRectangle(ofGetWindowWidth() - (32 * 9), ofGetWindowHeight() - (32 * 3), 32 * 8, 16);
-	ofDrawRectangle(ofGetWindowWidth() - (32 * 9), ofGetWindowHeight() - (32 * 2) + 16, 32 * 8, 16);
+	//White background of the stat bars
+	ofDrawRectangle(ofGetWindowWidth() - GlobalConstants::kStatsBarsX, 
+		ofGetWindowHeight() - GlobalConstants::kCharismaBarY, GlobalConstants::kStatsBarsLength, GlobalConstants::kStatsBarsWidth);
+	ofDrawRectangle(ofGetWindowWidth() - GlobalConstants::kStatsBarsX, 
+		ofGetWindowHeight() - GlobalConstants::kRomanceBarY, GlobalConstants::kStatsBarsLength, GlobalConstants::kStatsBarsWidth);
 
-	if (charisma_pts > 100)
-	{
-		charisma_pts = 100;
-	}
-	else if(charisma_pts < 0)
-	{
-	charisma_pts = 0;
-	}
-
-	if (romance_pts > 100)
-	{
-		romance_pts = 100;
-	}
-	else if (romance_pts < 0)
-	{
-		romance_pts = 0;
-	}
-
+	//Red progress of the charisma and romance stats
 	ofSetColor(255, 0, 0);
-	int percent_charisma = (charisma_pts / 100.0) * charisma_bar_length;
-	int percent_romance = (romance_pts / 100.0) * charisma_bar_length;
-	ofDrawRectangle(ofGetWindowWidth() - (32 * 9), ofGetWindowHeight() - (32 * 3), percent_charisma, 16);
-	ofDrawRectangle(ofGetWindowWidth() - (32 * 9), ofGetWindowHeight() - (32 * 2) + 16, percent_romance, 16);
+	ofDrawRectangle(ofGetWindowWidth() - GlobalConstants::kStatsBarsX, 
+		ofGetWindowHeight() - GlobalConstants::kCharismaBarY, percent_charisma_, GlobalConstants::kStatsBarsWidth);
+	ofDrawRectangle(ofGetWindowWidth() - GlobalConstants::kStatsBarsX, 
+		ofGetWindowHeight() - GlobalConstants::kRomanceBarY, percent_romance_, GlobalConstants::kStatsBarsWidth);
 
+	//Undo color to prevent entire screen being filled
 	ofEnableAlphaBlending();
 	ofSetColor(255, 255, 255, 255);
 }
@@ -57,11 +48,10 @@ void Player::UpdatePosition(Map map)
 	std::tuple<int, int> new_coordinates = GetNewCoordinates(current_direction_);
 	int new_x = std::get<0>(new_coordinates) + offset;
 	int new_y = std::get<1>(new_coordinates) + offset;
-	int x_coord = new_x / 32;
-	int y_coord = (new_y - 32) / 32;
-	int tile_number = (15 * y_coord) + x_coord;
+	int x_coord = new_x / GlobalConstants::kTileSize;
+	int y_coord = (new_y - GlobalConstants::kTileSize) / GlobalConstants::kTileSize;
+	int tile_number = (GlobalConstants::kNumOfRows * y_coord) + x_coord;
 	Tile next_tile = map.GetTiles()[tile_number];
-	ofRectangle next_tile_rect = next_tile.GetRectangle();
 
 	if (next_tile.NextRoom())
 	{
@@ -87,6 +77,30 @@ void Player::UpdatePosition(Map map)
 void Player::SetCurrentDirection(int direction)
 {
 	current_direction_ = static_cast<PlayerDirection>(direction);
+}
+
+void Player::UpdateStats()
+{
+	if (charisma_pts > 100)
+	{
+		charisma_pts = 100;
+	}
+	else if (charisma_pts < 0)
+	{
+		charisma_pts = 0;
+	}
+
+	if (romance_pts > 100)
+	{
+		romance_pts = 100;
+	}
+	else if (romance_pts < 0)
+	{
+		romance_pts = 0;
+	}
+
+	percent_charisma_ = (charisma_pts / 100.0) * GlobalConstants::kStatsBarsLength;
+	percent_romance_ = (romance_pts / 100.0) * GlobalConstants::kStatsBarsLength;
 }
 
 std::tuple<int, int> Player::GetNewCoordinates(int key)
@@ -138,6 +152,12 @@ bool Player::RoomVisited(std::string room)
 	return true;
 }
 
+void Player::SetStats(std::tuple<int, int> stats)
+{
+	charisma_pts += std::get<0>(stats);
+	romance_pts += std::get<1>(stats);
+}
+
 bool Player::MoveToNextRoom()
 {
 	return move_to_next_room;
@@ -166,10 +186,4 @@ bool Player::TalkToNpc()
 void Player::SetTalkToNpc(bool talk)
 {
 	talk_to_npc = talk;
-}
-
-void Player::SetStats(std::tuple<int, int> stats)
-{
-	charisma_pts += std::get<0>(stats);
-	romance_pts += std::get<1>(stats);
 }

@@ -1,6 +1,7 @@
 #pragma once
 #include "ofMain.h"
 #include "pugixml.hpp"
+#include "globalConstants.h"
 #include <string>
 #include <vector>
 #include <tuple>

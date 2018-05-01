@@ -3,6 +3,27 @@
 void Map::LoadNewMap(const std::string &file_name)
 {
 	tiles.clear();
+	ParseFile(file_name);
+
+	std::ifstream file(map_collisions);
+	std::string curr_coordinates;
+
+	for (int row = 0; row < number_of_rows; row++)
+	{
+		for (int col = 0; col < number_of_cols; col++)
+		{
+			file >> curr_coordinates;
+			Tile tile(col, row, GlobalConstants::kTileSize, GlobalConstants::kTileSize, curr_coordinates[0]);
+			tiles.push_back(tile);
+		}
+	}
+
+	npc.LoadNpc(file_name);
+	item.LoadItem(file_name);
+}
+
+void Map::ParseFile(const std::string &file_name)
+{
 	pugi::xml_document doc;
 	doc.load_file(file_name.c_str());
 
@@ -14,24 +35,8 @@ void Map::LoadNewMap(const std::string &file_name)
 	next_room = map.attribute("NextRoomPath").value();
 	previous_room = map.attribute("PreviousRoomPath").value();
 
-	int number_of_rows = map.attribute("Rows").as_int();
-	int number_of_cols = map.attribute("Columns").as_int();
-
-	std::ifstream file(map_collisions);
-	std::string curr_coordinates;
-
-	for (int row = 0; row < number_of_rows; row++)
-	{
-		for (int col = 0; col < number_of_cols; col++)
-		{
-			file >> curr_coordinates;
-			Tile tile(col, row, kTileSize, kTileSize, curr_coordinates[0]);
-			tiles.push_back(tile);
-		}
-	}
-
-	npc.LoadNpc(file_name);
-	item.LoadItem(file_name);
+	number_of_rows = map.attribute("Rows").as_int();
+	number_of_cols = map.attribute("Columns").as_int();
 
 	next_room_coordinates = std::make_tuple(map.attribute("NextRoomX").as_int(), map.attribute("NextRoomY").as_int());
 	previous_room_coordinates = std::make_tuple(map.attribute("PreviousRoomX").as_int(), map.attribute("PreviousRoomY").as_int());

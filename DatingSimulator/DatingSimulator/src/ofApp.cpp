@@ -5,7 +5,7 @@ void ofApp::setup() {
 	ofBackground(0, 0, 0);
 
 	player.LoadCharacter();
-	map.LoadNewMap(first_room_path);
+	map.LoadNewMap(GlobalConstants::kStartingRoomPath);
 	visited = player.RoomVisited(map.GetName());
 }
 

@@ -12,12 +12,13 @@ class Player
 private:
 	ofImage character;
 	PlayerDirection current_direction_ = kNone;
-	int pos_x = 12 * 32 + 8; // + 8 accounting for offset to be in middle of tile
-	int pos_y = 12 * 32;
-	int kTileSize = 32;
+	int pos_x = GlobalConstants::kStartingPosX;
+	int pos_y = GlobalConstants::kStartingPosY;
 	int offset = -8;
 	int charisma_pts = 50;
 	int romance_pts = 50;
+	int percent_charisma_;
+	int percent_romance_;
 
 	ofxCenteredTrueTypeFont charisma_;
 	ofxCenteredTrueTypeFont romance_;
@@ -38,12 +39,13 @@ public:
 	void DrawInfoBars();
 	void UpdatePosition(Map map);
 	void SetCurrentDirection(int direction);
+	void UpdateStats();
 	std::tuple<int, int> GetNewCoordinates(int key);
 
 	int GetX();
 	int GetY();
 
-	//change to map containing name of room visited, and bool of whether player has talked to npc/chosen 
+	void SetStats(std::tuple<int, int> stats);
 	bool RoomVisited(std::string room);
 	bool MoveToNextRoom();
 	void SetMoveToNextRoom(bool next);
@@ -51,5 +53,4 @@ public:
 	void SetMoveToPreviousRoom(bool prev);
 	bool TalkToNpc();
 	void SetTalkToNpc(bool talk);
-	void SetStats(std::tuple<int, int> stats);
 };

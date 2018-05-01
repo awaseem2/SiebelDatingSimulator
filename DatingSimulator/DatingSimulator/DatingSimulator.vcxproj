@@ -186,6 +186,7 @@ C:\Users\aly53\Downloads\openFrameworks\of_v0.9.8_vs_release\addons\ofxCenteredT
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\addons\ofxCenteredTrueTypeFont\src\ofxCenteredTrueTypeFont.h" />
+    <ClInclude Include="src\globalConstants.h" />
     <ClInclude Include="src\item.h" />
     <ClInclude Include="src\npc.h" />
     <ClInclude Include="src\map.h" />

@@ -6,7 +6,6 @@ Tile::Tile(int x, int y, int width, int height, char collision_type) :
 	width_(width),
 	height_(height)
 {
-	//switch case?
 	if (collision_type == '*')
 	{
 		can_walk_through = false;
@@ -14,19 +13,19 @@ Tile::Tile(int x, int y, int width, int height, char collision_type) :
 	else
 	{
 		can_walk_through = true;
-
-		if (collision_type == '+')
+		switch (collision_type)
 		{
+		case '+':
 			next_room = true;
+			break;
 
-		}
-		else if (collision_type == '-')
-		{
+		case '-':
 			previous_room = true;
-		}
-		else if (collision_type == '!')
-		{
+			break;
+
+		case '!':
 			has_npc = true;
+			break;
 		}
 	}
 }
@@ -50,17 +49,3 @@ bool Tile::HasNpc()
 {
 	return has_npc;
 }
-
-ofRectangle Tile::GetRectangle()
-{
-	ofRectangle rect;
-	rect.setX(x_);
-	rect.setY(y_);
-	rect.setSize(width_, height_);
-	return rect;
-}
-
-
-
-
-

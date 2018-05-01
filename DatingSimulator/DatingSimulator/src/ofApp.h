@@ -14,7 +14,6 @@ private:
 	Player player;
 	bool draw_npc_message = false;
 	bool visited;
-	std::string first_room_path = "C:/Users/aly53/Downloads/openFrameworks/of_v0.9.8_vs_release/126 Final Project/DatingSimulator/DatingSimulator/bin/data/assets/OutsideSiebel.xml";
 	
 public:
 	void setup();

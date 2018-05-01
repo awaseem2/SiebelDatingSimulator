@@ -55,6 +55,7 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\item.h" />
+    <ClInclude Include="src\globalConstants.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />
