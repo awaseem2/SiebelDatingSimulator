@@ -30,7 +30,7 @@ void Player::DrawInfoBars()
 	}
 	else if(charisma_pts < 0)
 	{
-		charisma_pts = 0;
+	charisma_pts = 0;
 	}
 
 	if (romance_pts > 100)
@@ -126,6 +126,18 @@ int Player::GetY()
 	return pos_y;
 }
 
+bool Player::RoomVisited(std::string room)
+{
+	//check to see if room hasn't been visited
+	if (std::find(rooms_visited.begin(), rooms_visited.end(), room) == rooms_visited.end())
+	{
+		rooms_visited.push_back(room);
+		return false;
+	}
+
+	return true;
+}
+
 bool Player::MoveToNextRoom()
 {
 	return move_to_next_room;
@@ -154,4 +166,10 @@ bool Player::TalkToNpc()
 void Player::SetTalkToNpc(bool talk)
 {
 	talk_to_npc = talk;
+}
+
+void Player::SetStats(std::tuple<int, int> stats)
+{
+	charisma_pts += std::get<0>(stats);
+	romance_pts += std::get<1>(stats);
 }

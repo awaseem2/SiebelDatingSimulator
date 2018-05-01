@@ -6,14 +6,15 @@ void ofApp::setup() {
 	ofBackground(0, 0, 0);
 
 	player.LoadCharacter();
-	map.LoadMap("C:/Users/aly53/Downloads/openFrameworks/of_v0.9.8_vs_release/126 Final Project/DatingSimulator/DatingSimulator/bin/data/assets/OutsideSiebel.xml");
+	map.LoadNewMap("C:/Users/aly53/Downloads/openFrameworks/of_v0.9.8_vs_release/126 Final Project/DatingSimulator/DatingSimulator/bin/data/assets/OutsideSiebel.xml");
+	visited = player.RoomVisited(map.GetName());
 }
 
 //--------------------------------------------------------------
 void ofApp::update() {
 	player.UpdatePosition(map);
 
-	if (player.TalkToNpc())
+	if (player.TalkToNpc() && !visited)
 	{
 		draw_npc_message = true;
 		player.SetTalkToNpc(false);
@@ -26,12 +27,14 @@ void ofApp::update() {
 	if (player.MoveToNextRoom())
 	{
 		player.SetMoveToNextRoom(false);
-		map.LoadMap(map.GetNextRoom());
+		map.LoadNewMap(map.GetNextRoom());
+		visited = player.RoomVisited(map.GetName());
 	}
 	else if (player.MoveToPreviousRoom())
 	{
 		player.SetMoveToPreviousRoom(false);
-		map.LoadMap(map.GetPreviousRoom());
+		map.LoadNewMap(map.GetPreviousRoom());
+		visited = player.RoomVisited(map.GetName());
 	}
 
 }
@@ -72,6 +75,22 @@ void ofApp::mouseDragged(int x, int y, int button) {
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button) {
+	ofRectangle option_1 = map.GetNpc().GetOption1Rect();
+	ofRectangle option_2 = map.GetNpc().GetOption2Rect();
+
+	if (option_1.inside(x, y))
+	{
+		map.GetNpc().SetOptionChosen(true, 1);
+		map.GetNpc().SetShowOptions(false);
+		player.SetStats(map.GetNpc().GetStatsChange());
+	}
+
+	else if (option_2.inside(x, y))
+	{
+		map.GetNpc().SetOptionChosen(true, 2);
+		map.GetNpc().SetShowOptions(false);
+		player.SetStats(map.GetNpc().GetStatsChange());
+	}
 
 }
 

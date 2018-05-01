@@ -13,6 +13,7 @@ private:
 	Map map;
 	Player player;
 	bool draw_npc_message = false;
+	bool visited;
 	
 public:
 	void setup();

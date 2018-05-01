@@ -2,6 +2,9 @@
 #include "map.h"
 #include "ofMain.h"
 #include "ofxCenteredTrueTypeFont.h"
+#include <string>
+#include <tuple>
+#include <vector>
 
 class Player
 {
@@ -27,6 +30,8 @@ private:
 	bool move_to_previous_room = false;
 	bool talk_to_npc = false;
 
+	std::vector<std::string> rooms_visited;
+
 public:
 	void LoadCharacter();
 	void DrawCharacter();
@@ -38,10 +43,13 @@ public:
 	int GetX();
 	int GetY();
 
+	//change to map containing name of room visited, and bool of whether player has talked to npc/chosen 
+	bool RoomVisited(std::string room);
 	bool MoveToNextRoom();
 	void SetMoveToNextRoom(bool next);
 	bool MoveToPreviousRoom();
 	void SetMoveToPreviousRoom(bool prev);
 	bool TalkToNpc();
 	void SetTalkToNpc(bool talk);
+	void SetStats(std::tuple<int, int> stats);
 };

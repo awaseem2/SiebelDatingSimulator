@@ -22,18 +22,20 @@ private:
 	int kTileSize = 32;
 	ofImage map_image_;
 	std::string map_collisions;
+	std::string name;
 	std::string next_room;
 	std::string previous_room;
 	tuple<int, int> next_room_coordinates;
 	tuple<int, int> previous_room_coordinates;
 
 public:
-	void LoadMap(const std::string &file_name);
+	void LoadNewMap(const std::string &file_name);
 	vector<Tile> GetTiles();
 	void DrawMap();
 	std::string GetNextRoom();
 	tuple<int, int> GetNextRoomCoordinates();
 	std::string GetPreviousRoom();
 	tuple<int, int> GetPreviousRoomCoordinates();
-	Npc GetNpc();
+	Npc& GetNpc();
+	std::string GetName();
 };

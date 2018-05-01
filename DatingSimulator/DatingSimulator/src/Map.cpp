@@ -1,6 +1,6 @@
 #include "map.h"
 
-void Map::LoadMap(const std::string &file_name)
+void Map::LoadNewMap(const std::string &file_name)
 {
 	tiles.clear();
 	pugi::xml_document doc;
@@ -10,6 +10,7 @@ void Map::LoadMap(const std::string &file_name)
 
 	map_collisions = map.attribute("Collisions").value();
 	map_image_.load(map.attribute("MapImagePath").value());
+	name = map.attribute("Name").value();
 	next_room = map.attribute("NextRoomPath").value();
 	previous_room = map.attribute("PreviousRoomPath").value();
 
@@ -68,7 +69,12 @@ tuple<int, int> Map::GetPreviousRoomCoordinates()
 	return previous_room_coordinates;
 }
 
-Npc Map::GetNpc()
+Npc& Map::GetNpc()
 {
 	return npc;
+}
+
+std::string Map::GetName()
+{
+	return name;
 }
