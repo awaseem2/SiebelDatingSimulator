@@ -25,7 +25,7 @@ void Map::LoadNewMap(const std::string &file_name)
 		for (int col = 0; col < number_of_cols; col++)
 		{
 			file >> curr_coordinates;
-			Tile tile((col) * kTileSize, (row) * kTileSize, width, height, curr_coordinates[0]);
+			Tile tile(col, row, kTileSize, kTileSize, curr_coordinates[0]);
 			tiles.push_back(tile);
 		}
 	}

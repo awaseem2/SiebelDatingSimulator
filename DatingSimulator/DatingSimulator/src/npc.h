@@ -64,5 +64,6 @@ public:
 	int GetY();
 	ofRectangle GetOption1Rect();
 	ofRectangle GetOption2Rect();
+	bool OptionChosen();
 };
 

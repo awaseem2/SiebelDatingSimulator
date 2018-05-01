@@ -97,19 +97,19 @@ std::tuple<int, int> Player::GetNewCoordinates(int key)
 	switch (key)
 	{
 	case kDown:
-		new_y = pos_y + kTileSize;
+		new_y = pos_y + 1;
 		break;
 
 	case kUp:
-		new_y = pos_y - kTileSize;
+		new_y = pos_y - 1;
 		break;
 
 	case kRight:
-		new_x = pos_x + kTileSize;
+		new_x = pos_x + 1;
 		break;
 
 	case kLeft:
-		new_x = pos_x - kTileSize;
+		new_x = pos_x - 1;
 		break;
 	}
 

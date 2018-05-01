@@ -17,8 +17,6 @@ private:
 	Npc npc;
 	Item item;
 	vector<Tile> tiles;
-	int width = 32;
-	int height = 32;
 	int kTileSize = 32;
 	ofImage map_image_;
 	std::string map_collisions;

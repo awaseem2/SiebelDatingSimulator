@@ -14,7 +14,7 @@ private:
 	PlayerDirection current_direction_ = kNone;
 	int pos_x = 12 * 32 + 8; // + 8 accounting for offset to be in middle of tile
 	int pos_y = 12 * 32;
-	int kTileSize = 1;
+	int kTileSize = 32;
 	int offset = -8;
 	int charisma_pts = 50;
 	int romance_pts = 50;

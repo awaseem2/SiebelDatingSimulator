@@ -174,4 +174,9 @@ ofRectangle Npc::GetOption2Rect()
 	return rect;
 }
 
+bool Npc::OptionChosen()
+{
+	return option_chosen;
+}
+
 
