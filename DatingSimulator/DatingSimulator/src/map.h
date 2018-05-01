@@ -14,20 +14,20 @@ using std::tuple;
 class Map
 {
 private:
-	Npc npc;
-	Item item;
-	vector<Tile> tiles;
+	Npc npc_;
+	Item item_;
+	vector<Tile> tiles_;
 	ofImage map_image_;
 
-	pugi::xml_node map;
-	std::string map_collisions;
-	std::string name;
-	int number_of_rows;
-	int number_of_cols;
-	std::string next_room;
-	std::string previous_room;
-	tuple<int, int> next_room_coordinates;
-	tuple<int, int> previous_room_coordinates;
+	std::string map_collisions_;
+	std::string name_;
+	int number_of_rows_;
+	int number_of_cols_;
+	std::string next_room_;
+	std::string previous_room_;
+
+	tuple<int, int> next_room_coordinates_;
+	tuple<int, int> previous_room_coordinates_;
 
 public:
 	void LoadNewMap(const std::string &file_name);

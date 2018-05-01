@@ -11,11 +11,11 @@ void Item::LoadItem(std::string file_name)
 
 	if (item.empty())
 	{
-		item_exists = false;
+		item_exists_ = false;
 	}
 	else
 	{
-		item_exists = true;
+		item_exists_ = true;
 		auto path = item.attribute("Path").value();
 		item_image_.load(path);
 
@@ -26,7 +26,7 @@ void Item::LoadItem(std::string file_name)
 
 void Item::DrawItem()
 {
-	if (item_exists)
+	if (item_exists_)
 	{
 		item_image_.draw(x_, y_);
 	}

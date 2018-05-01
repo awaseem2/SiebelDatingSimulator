@@ -3,75 +3,51 @@
 
 void Player::LoadCharacter()
 {
-	character.load("../data/MainCharacter.png");
-	charisma_.loadFont(GlobalConstants::kFontName, GlobalConstants::kSmallTextSize);
-	romance_.loadFont(GlobalConstants::kFontName, GlobalConstants::kSmallTextSize);
+	character_.load("../data/MainCharacter.png");
 }
 
 void Player::DrawCharacter()
 {
-	character.draw(pos_x, pos_y);
-	DrawInfoBars();
-}
-
-void Player::DrawInfoBars()
-{
+	character_.draw(pos_x_, pos_y_);
 	UpdateStats();
-
-	//Charisma and Romance labels
-	ofSetColor(255, 255, 255);
-	charisma_.drawStringCentered("Charisma", ofVec2f(ofGetWindowWidth() - GlobalConstants::kStatsLabelsX, 
-		ofGetWindowHeight() - GlobalConstants::kCharismaLabelY));
-	romance_.drawStringCentered("Romance", ofVec2f(ofGetWindowWidth() - GlobalConstants::kStatsLabelsX, 
-		ofGetWindowHeight() - GlobalConstants::kRomanceLabelY));
-
-	//White background of the stat bars
-	ofDrawRectangle(ofGetWindowWidth() - GlobalConstants::kStatsBarsX, 
-		ofGetWindowHeight() - GlobalConstants::kCharismaBarY, GlobalConstants::kStatsBarsLength, GlobalConstants::kStatsBarsWidth);
-	ofDrawRectangle(ofGetWindowWidth() - GlobalConstants::kStatsBarsX, 
-		ofGetWindowHeight() - GlobalConstants::kRomanceBarY, GlobalConstants::kStatsBarsLength, GlobalConstants::kStatsBarsWidth);
-
-	//Red progress of the charisma and romance stats
-	ofSetColor(255, 0, 0);
-	ofDrawRectangle(ofGetWindowWidth() - GlobalConstants::kStatsBarsX, 
-		ofGetWindowHeight() - GlobalConstants::kCharismaBarY, percent_charisma_, GlobalConstants::kStatsBarsWidth);
-	ofDrawRectangle(ofGetWindowWidth() - GlobalConstants::kStatsBarsX, 
-		ofGetWindowHeight() - GlobalConstants::kRomanceBarY, percent_romance_, GlobalConstants::kStatsBarsWidth);
-
-	//Undo color to prevent entire screen being filled
-	ofEnableAlphaBlending();
-	ofSetColor(255, 255, 255, 255);
 }
 
 void Player::UpdatePosition(Map map)
 {
 	std::tuple<int, int> new_coordinates = GetNewCoordinates(current_direction_);
-	int new_x = std::get<0>(new_coordinates) + offset;
-	int new_y = std::get<1>(new_coordinates) + offset;
+	int new_x = std::get<0>(new_coordinates) - GlobalConstants::kOffset;
+	int new_y = std::get<1>(new_coordinates) - GlobalConstants::kOffset;
+	Tile next_tile = GetNextTile(map, new_x, new_y);
+
+	if (next_tile.NextRoom())
+	{
+		move_to_next_room_ = true;
+		pos_x_ = std::get<0>(map.GetNextRoomCoordinates());
+		pos_y_ = std::get<1>(map.GetNextRoomCoordinates());
+	}
+	else if (next_tile.PreviousRoom())
+	{
+		move_to_previous_room_ = true;
+		pos_x_ = std::get<0>(map.GetPreviousRoomCoordinates());
+		pos_y_ = std::get<1>(map.GetPreviousRoomCoordinates());
+	}
+	else if (next_tile.CanWalkThrough())
+	{
+		pos_x_ = new_x + GlobalConstants::kOffset;
+		pos_y_ = new_y + GlobalConstants::kOffset;
+	}
+
+	talk_to_npc_ = next_tile.HasNpc();
+}
+
+Tile Player::GetNextTile(Map map, int new_x, int new_y)
+{
 	int x_coord = new_x / GlobalConstants::kTileSize;
 	int y_coord = (new_y - GlobalConstants::kTileSize) / GlobalConstants::kTileSize;
 	int tile_number = (GlobalConstants::kNumOfRows * y_coord) + x_coord;
 	Tile next_tile = map.GetTiles()[tile_number];
 
-	if (next_tile.NextRoom())
-	{
-		move_to_next_room = true;
-		pos_x = std::get<0>(map.GetNextRoomCoordinates());
-		pos_y = std::get<1>(map.GetNextRoomCoordinates());
-	}
-	else if (next_tile.PreviousRoom())
-	{
-		move_to_previous_room = true;
-		pos_x = std::get<0>(map.GetPreviousRoomCoordinates());
-		pos_y = std::get<1>(map.GetPreviousRoomCoordinates());
-	}
-	else if (next_tile.CanWalkThrough())
-	{
-		pos_x = new_x - offset;
-		pos_y = new_y - offset;
-	}
-
-	talk_to_npc = next_tile.HasNpc();
+	return next_tile;
 }
 
 void Player::SetCurrentDirection(int direction)
@@ -81,63 +57,59 @@ void Player::SetCurrentDirection(int direction)
 
 void Player::UpdateStats()
 {
-	if (charisma_pts > 100)
+	if (charisma_pts_ > 100)
 	{
-		charisma_pts = 100;
+		charisma_pts_ = 100;
 	}
-	else if (charisma_pts < 0)
+	else if (charisma_pts_ < 0)
 	{
-		charisma_pts = 0;
-	}
-
-	if (romance_pts > 100)
-	{
-		romance_pts = 100;
-	}
-	else if (romance_pts < 0)
-	{
-		romance_pts = 0;
+		charisma_pts_ = 0;
 	}
 
-	percent_charisma_ = (charisma_pts / 100.0) * GlobalConstants::kStatsBarsLength;
-	percent_romance_ = (romance_pts / 100.0) * GlobalConstants::kStatsBarsLength;
+	if (romance_pts_ > 100)
+	{
+		romance_pts_ = 100;
+	}
+	else if (romance_pts_ < 0)
+	{
+		romance_pts_ = 0;
+	}
+
+	percent_charisma_ = (charisma_pts_ / 100.0) * GlobalConstants::kStatsBarsLength;
+	percent_romance_ = (romance_pts_ / 100.0) * GlobalConstants::kStatsBarsLength;
 }
 
 std::tuple<int, int> Player::GetNewCoordinates(int key)
 {
-	int new_y = pos_y;
-	int new_x = pos_x;
+	int new_y = pos_y_;
+	int new_x = pos_x_;
 
 	switch (key)
 	{
 	case kDown:
-		new_y = pos_y + 1;
+		new_y = pos_y_ + 1;
 		break;
 
 	case kUp:
-		new_y = pos_y - 1;
+		new_y = pos_y_ - 1;
 		break;
 
 	case kRight:
-		new_x = pos_x + 1;
+		new_x = pos_x_ + 1;
 		break;
 
 	case kLeft:
-		new_x = pos_x - 1;
+		new_x = pos_x_ - 1;
 		break;
 	}
 
 	return std::make_tuple(new_x, new_y);
 }
 
-int Player::GetX()
+void Player::SetStats(std::tuple<int, int> stats)
 {
-	return pos_x;
-}
-
-int Player::GetY()
-{
-	return pos_y;
+	charisma_pts_ += std::get<0>(stats);
+	romance_pts_ += std::get<1>(stats);
 }
 
 bool Player::RoomVisited(std::string room)
@@ -152,38 +124,52 @@ bool Player::RoomVisited(std::string room)
 	return true;
 }
 
-void Player::SetStats(std::tuple<int, int> stats)
+int Player::GetX()
 {
-	charisma_pts += std::get<0>(stats);
-	romance_pts += std::get<1>(stats);
+	return pos_x_;
+}
+
+int Player::GetY()
+{
+	return pos_y_;
+}
+
+int Player::GetPercentCharisma()
+{
+	return percent_charisma_;
+}
+
+int Player::GetPercentRomance()
+{
+	return percent_romance_;
 }
 
 bool Player::MoveToNextRoom()
 {
-	return move_to_next_room;
+	return move_to_next_room_;
 }
 
 void Player::SetMoveToNextRoom(bool next)
 {
-	move_to_next_room = next;
+	move_to_next_room_ = next;
 }
 
 bool Player::MoveToPreviousRoom()
 {
-	return move_to_previous_room;
+	return move_to_previous_room_;
 }
 
 void Player::SetMoveToPreviousRoom(bool prev)
 {
-	move_to_previous_room = prev;
+	move_to_previous_room_ = prev;
 }
 
 bool Player::TalkToNpc()
 {
-	return talk_to_npc;
+	return talk_to_npc_;
 }
 
 void Player::SetTalkToNpc(bool talk)
 {
-	talk_to_npc = talk;
+	talk_to_npc_ = talk;
 }

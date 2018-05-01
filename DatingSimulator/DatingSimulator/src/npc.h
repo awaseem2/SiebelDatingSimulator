@@ -22,33 +22,33 @@ private:
 	int option_2_y_ = greeting_y_ + 32 * 5.5;
 	int options_height_ = 32;
 	int options_width_ = ofGetWindowWidth() - 32 * 22;
-	int message_index = 0;
-	bool npc_exists = false;
-	bool show_options = false;
-	bool option_chosen;
+	int message_index_ = 0;
+	bool npc_exists_ = false;
+	bool show_options_ = false;
+	bool option_chosen_;
 	
 	
-	std::string greeting; 
-	pugi::xml_node curr_room;
+	std::string greeting_; 
+	pugi::xml_node curr_room_;
 	pugi::xml_node npc_;
 	ofImage npc_image_;
 
-	ofxCenteredTrueTypeFont greeting_ttf;
+	ofxCenteredTrueTypeFont greeting_ttf_;
 	pugi::xml_node option_1_;
 	pugi::xml_node option_2_;
-	ofxCenteredTrueTypeFont option_1_ttf;
-	ofxCenteredTrueTypeFont option_2_ttf;
-	std::string option_1_text;
-	std::string option_2_text;
-	bool option_1_chosen = false;
-	bool option_2_chosen = false;
-	std::string outcome_1;
-	std::string outcome_2;
-	int charisma_1;
-	int charisma_2;
-	int romance_1;
-	int romance_2;
-	ofxCenteredTrueTypeFont outcome_ttf;
+	ofxCenteredTrueTypeFont option_1_ttf_;
+	ofxCenteredTrueTypeFont option_2_ttf_;
+	std::string option_1_text_;
+	std::string option_2_text_;
+	bool option_1_chosen_ = false;
+	bool option_2_chosen_ = false;
+	std::string outcome_1_;
+	std::string outcome_2_;
+	int charisma_1_;
+	int charisma_2_;
+	int romance_1_;
+	int romance_2_;
+	ofxCenteredTrueTypeFont outcome_ttf_;
 
 public:
 	void LoadNpc(const std::string &file_name);

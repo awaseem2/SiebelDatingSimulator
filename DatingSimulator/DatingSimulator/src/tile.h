@@ -10,10 +10,10 @@ private:
 	int y_;
 	int width_;
 	int height_;
-	bool can_walk_through = false;
-	bool next_room = false;
-	bool previous_room = false;
-	bool has_npc = false;
+	bool can_walk_through_ = false;
+	bool next_room_ = false;
+	bool previous_room_ = false;
+	bool has_npc_ = false;
 
 public:
 	Tile(int x, int y, int width, int height, char collision_type);

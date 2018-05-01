@@ -10,15 +10,23 @@ using std::vector;
 class ofApp : public ofBaseApp {
 
 private:
-	Map map;
-	Player player;
-	bool draw_npc_message = false;
-	bool visited;
-	
+	Map map_;
+	Player player_;
+	bool draw_npc_message_ = false;
+	bool visited_;
+
+	ofxCenteredTrueTypeFont charisma_;
+	ofxCenteredTrueTypeFont romance_;
+	ofRectangle charisma_bar_bg_;
+	ofRectangle romance_bar_bg_;
+	ofRectangle charisma_bar_progress_;
+	ofRectangle romance_bar_progress_;
+
 public:
 	void setup();
 	void update();
 	void draw();
+	void drawInfoBars();
 
 	void keyPressed(int key);
 	void keyReleased(int key);
