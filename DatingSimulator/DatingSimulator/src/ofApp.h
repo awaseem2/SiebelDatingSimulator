@@ -7,14 +7,22 @@
 
 using std::vector;
 
+enum GameState {
+	INTRODUCTION,
+	IN_PROGRESS
+};
+
 class ofApp : public ofBaseApp {
 
 private:
+	GameState current_state_ = INTRODUCTION;
 	Map map_;
 	Player player_;
 	bool draw_npc_message_ = false;
 	bool visited_;
 
+	ofxCenteredTrueTypeFont introduction_ttf_;
+	ofxCenteredTrueTypeFont continue_ttf_;
 	ofxCenteredTrueTypeFont charisma_;
 	ofxCenteredTrueTypeFont romance_;
 	ofRectangle charisma_bar_bg_;
@@ -24,9 +32,11 @@ private:
 
 public:
 	void setup();
+	void LoadText();
 	void update();
 	void draw();
 	void drawInfoBars();
+	void drawIntro();
 
 	void keyPressed(int key);
 	void keyReleased(int key);

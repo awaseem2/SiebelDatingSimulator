@@ -8,48 +8,67 @@ void ofApp::setup() {
 	map_.LoadNewMap(GlobalConstants::kStartingRoomPath);
 	visited_ = player_.RoomVisited(map_.GetName());
 
+	LoadText();
+}
+
+void ofApp::LoadText()
+{
+	introduction_ttf_.load(GlobalConstants::kFontName, 43);
+	continue_ttf_.load(GlobalConstants::kFontName, 40);
+
+
 	charisma_.loadFont(GlobalConstants::kFontName, GlobalConstants::kSmallTextSize);
 	romance_.loadFont(GlobalConstants::kFontName, GlobalConstants::kSmallTextSize);
 }
 
 void ofApp::update() {
-	player_.UpdatePosition(map_);
+	
+	if (current_state_ == IN_PROGRESS)
+	{
+		player_.UpdatePosition(map_);
 
-	if (player_.TalkToNpc() && !visited_)
-	{
-		draw_npc_message_ = true;
-		player_.SetTalkToNpc(false);
-	}
-	else
-	{
-		draw_npc_message_ = false;
-	}
+		if (player_.TalkToNpc() && !visited_)
+		{
+			draw_npc_message_ = true;
+			player_.SetTalkToNpc(false);
+		}
+		else
+		{
+			draw_npc_message_ = false;
+		}
 
-	if (player_.MoveToNextRoom())
-	{
-		player_.SetMoveToNextRoom(false);
-		map_.LoadNewMap(map_.GetNextRoom());
-		visited_ = player_.RoomVisited(map_.GetName());
+		if (player_.MoveToNextRoom())
+		{
+			player_.SetMoveToNextRoom(false);
+			map_.LoadNewMap(map_.GetNextRoom());
+			visited_ = player_.RoomVisited(map_.GetName());
+		}
+		else if (player_.MoveToPreviousRoom())
+		{
+			player_.SetMoveToPreviousRoom(false);
+			map_.LoadNewMap(map_.GetPreviousRoom());
+			visited_ = player_.RoomVisited(map_.GetName());
+		}
 	}
-	else if (player_.MoveToPreviousRoom())
-	{
-		player_.SetMoveToPreviousRoom(false);
-		map_.LoadNewMap(map_.GetPreviousRoom());
-		visited_ = player_.RoomVisited(map_.GetName());
-	}
-
 }
 
 void ofApp::draw() {
-	map_.DrawMap();
-	player_.DrawCharacter();
-
-	if (draw_npc_message_)
+	if (current_state_ == INTRODUCTION)
 	{
-		map_.GetNpc().DrawMessage();
+		drawIntro();
 	}
+	else 
+	{
+		map_.DrawMap();
+		player_.DrawCharacter();
 
-	drawInfoBars();
+		if (draw_npc_message_)
+		{
+			map_.GetNpc().DrawMessage();
+		}
+
+		drawInfoBars();
+	}
 }
 
 void ofApp::drawInfoBars()
@@ -79,6 +98,12 @@ void ofApp::drawInfoBars()
 	ofSetColor(255, 255, 255, 255);
 }
 
+void ofApp::drawIntro()
+{
+	introduction_ttf_.drawStringCentered(GlobalConstants::kIntroduction, ofGetWindowWidth() / 2, ofGetWindowHeight() / 2);
+	continue_ttf_.drawStringCentered("click anywhere to continue", ofGetWindowWidth() / 2, ofGetWindowHeight() - 32 * 2);
+}
+
 void ofApp::keyPressed(int key) {
 	if (key == OF_KEY_DOWN || key == OF_KEY_UP || key == OF_KEY_RIGHT || OF_KEY_LEFT)
 	{
@@ -91,23 +116,31 @@ void ofApp::keyReleased(int key) {
 }
 
 void ofApp::mousePressed(int x, int y, int button) {
-	bool option_chosen = map_.GetNpc().OptionChosen();
-	if (!option_chosen)
-	{ 
-		ofRectangle option_1 = map_.GetNpc().GetOption1Rect();
-		ofRectangle option_2 = map_.GetNpc().GetOption2Rect();
+	
+	if (current_state_ == INTRODUCTION)
+	{
+		current_state_ = IN_PROGRESS;
+	}
+	else
+	{
+		bool option_chosen = map_.GetNpc().OptionChosen();
+		if (!option_chosen)
+		{
+			ofRectangle option_1 = map_.GetNpc().GetOption1Rect();
+			ofRectangle option_2 = map_.GetNpc().GetOption2Rect();
 
-		if (option_1.inside(x, y))
-		{
-			map_.GetNpc().SetOptionChosen(true, 1);
-			map_.GetNpc().SetShowOptions(false);
-			player_.SetStats(map_.GetNpc().GetStatsChange());
-		}
-		else if (option_2.inside(x, y))
-		{
-			map_.GetNpc().SetOptionChosen(true, 2);
-			map_.GetNpc().SetShowOptions(false);
-			player_.SetStats(map_.GetNpc().GetStatsChange());
+			if (option_1.inside(x, y))
+			{
+				map_.GetNpc().SetOptionChosen(true, 1);
+				map_.GetNpc().SetShowOptions(false);
+				player_.SetStats(map_.GetNpc().GetStatsChange());
+			}
+			else if (option_2.inside(x, y))
+			{
+				map_.GetNpc().SetOptionChosen(true, 2);
+				map_.GetNpc().SetShowOptions(false);
+				player_.SetStats(map_.GetNpc().GetStatsChange());
+			}
 		}
 	}
 }
