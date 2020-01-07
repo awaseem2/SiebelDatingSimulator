@@ -10,3 +10,8 @@ There's only two rooms in the game right now. However, it gives a general sense 
 ### How To Run
 This is an openframeworks project. For Visual Studio on Windows, download the openframeworks addon. You must have Windows SDK 8.1 
 downloaded. Clone this repository, then navigate to the Project Generator in your openframeworks folder. Using the Project Generator, specify the path of the folder the repo was cloned to. Click generate and open the project in Visual Studio.
+
+### Screenshots
+![Introduction](https://github.com/awaseem2/SiebelDatingSimulator/blob/master/DatingSimulator/DatingSimulator/Screenshots/Intro.png)
+![Speaking with Professor Angrave](https://github.com/awaseem2/SiebelDatingSimulator/blob/master/DatingSimulator/DatingSimulator/Screenshots/Angrave.png)
+![Speaking with a girl NPC](https://github.com/awaseem2/SiebelDatingSimulator/blob/master/DatingSimulator/DatingSimulator/Screenshots/girl.png)
